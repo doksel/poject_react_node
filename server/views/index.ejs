@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>my project</title>
-</head>
-<body>
+<% include layout/header.ejs %>
+
     <div><h3>My personal data:</h3></div>
     <div><span>My name: </span><span><%= data[0].name %></span></div>
     <div><span>My sername: </span><span><%= data[0].sername %></span></div>
@@ -18,5 +11,5 @@
         <div><span>sername: </span><span><%= user.sername %></span></div>
         <div><span>age: </span><span><%= user.age %></span></div>
     <% }) %>
-</body>
-</html>
+
+<% include layout/footer.ejs %>

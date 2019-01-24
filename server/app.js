@@ -1,10 +1,14 @@
 const express = require('express');
+const path = require('path');
+
 const Users = require('./models/users');
 const app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/javascrips',express.static(path.join(__dirname, 'node_modules', 'jquery','dist')));
 
 let data = [
     {
