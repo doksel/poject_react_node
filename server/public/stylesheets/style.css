@@ -10,9 +10,18 @@
   background: #4a4a4a;
   padding: 50px 0; }
 
+.nav_sidebar {
+  display: flex;
+  flex-direction: column;
+  background: red;
+  color: #fff; }
+
 body {
   font-size: 18px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background: #969696; }
+
+.site_inner {
+  display: flex; }
 
 /*# sourceMappingURL=style.css.map*/
