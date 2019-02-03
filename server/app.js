@@ -27,6 +27,11 @@ app.get('/', (req, res) => {
         res.render('index',{users:users, data:data})
     })
 });
+app.get('/users', (req, res) => {
+    Users.find({}).then(users => {
+        res.render('users',{users:users})
+    })
+});
 
 app.get('/create', (req, res) => res.render('create'));
 app.post('/create', (req, res) => {

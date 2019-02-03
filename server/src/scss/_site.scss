@@ -1,5 +1,6 @@
 body{
-    font-size: 18px;
+    font-size: $font_size_main;
+    font-weight: 300;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background: #969696;
     min-height: 100vh;
@@ -8,8 +9,10 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: $bg_page;
 }
 .site{
+    flex-grow: 1;
     &_inner{
         display: flex;
     }

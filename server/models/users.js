@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const schema = new Schema({
+const schemaUsers = new Schema({
         name: {
             type: String,
             required : true
@@ -18,6 +18,6 @@ const schema = new Schema({
     }
 );
 
-schema.set('toJSON',{virtuals: true});
+schemaUsers.set('toJSON',{virtuals: true});
 
-module.exports = mongoose.model('Users', schema);
+module.exports = mongoose.model('Users', schemaUsers);

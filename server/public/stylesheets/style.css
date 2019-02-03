@@ -20,23 +20,42 @@ img {
 .header {
   font-size: 30px;
   text-align: center;
-  background: #4a4a4a;
-  padding: 50px 0; }
+  background: #535C69;
+  padding: 20px 0;
+  color: #fff; }
 
 .footer {
   font-size: 30px;
   text-align: center;
-  background: #4a4a4a;
-  padding: 50px 0; }
+  background: #535C69;
+  padding: 50px 0;
+  color: #fff; }
 
 .nav_sidebar {
   display: flex;
   flex-direction: column;
-  background: red;
+  background: #343a40;
   color: #fff; }
+  .nav_sidebar .link_nav {
+    padding: 5px 10px;
+    border-radius: 2px; }
+    .nav_sidebar .link_nav:hover {
+      background: rgba(255, 255, 255, 0.3); }
+
+.users {
+  padding: 20px; }
+  .users_list {
+    display: flex;
+    flex-direction: column; }
+    .users_list .user {
+      padding: 5px;
+      border: solid 1px rgba(0, 0, 0, 0.4);
+      border-radius: 5px;
+      margin-bottom: 10px; }
 
 body {
   font-size: 18px;
+  font-weight: 300;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background: #969696;
   min-height: 100vh;
@@ -44,9 +63,12 @@ body {
   display: flex;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; }
+  justify-content: space-between;
+  background: #EEF2F4; }
 
-.site_inner {
-  display: flex; }
+.site {
+  flex-grow: 1; }
+  .site_inner {
+    display: flex; }
 
 /*# sourceMappingURL=style.css.map*/
