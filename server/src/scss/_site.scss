@@ -2,7 +2,15 @@ body{
     font-size: 18px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background: #969696;
-}
-.site_inner{
+    min-height: 100vh;
+    height: 100%;
     display: flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.site{
+    &_inner{
+        display: flex;
+    }
 }

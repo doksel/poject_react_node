@@ -1,3 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+ul, li {
+  list-style: none; }
+
+a, button {
+  outline: none; }
+
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block; }
+
+img {
+  display: block; }
+
 .header {
   font-size: 30px;
   text-align: center;
@@ -19,7 +38,13 @@
 body {
   font-size: 18px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background: #969696; }
+  background: #969696;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
 
 .site_inner {
   display: flex; }
