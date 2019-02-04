@@ -1,8 +1,7 @@
-const express = require('express')
-const router = express.Router()
- 
-router.get('/', (req, res) => {
-    res.render('index')
-})
- 
-module.exports = router
+const admin = require('./admin');
+const api = require('./api');
+
+module.exports = {
+    admin,
+    api
+}

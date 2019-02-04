@@ -4,7 +4,10 @@ const engine = require('ejs-mate');
 const Users = require('./models/users');
 const app = express();
 
+// routers
+const admin = require('./routes/index');
 
+// sets and uses
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -45,6 +48,9 @@ app.post('/create', (req, res) => {
 
     res.redirect('/');
 });
+
+// === routes
+app.use('/admin', admin);
 
 
 module.exports = app;
