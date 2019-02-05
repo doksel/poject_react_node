@@ -1,12 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const Users = require('../models/users');
 
-router.use("/create", function(request, response){
-    response.send("Добавление товара");
+router.get("/", function(req, res){
+    Users.find({}).then(users => {
+        res.render('index',{users:users})
+    });
+    res.send(`список пользователей`);
 });
-router.use("/:id", function(request, response){
-    response.send(`Товар ${request.params.id}`);
+router.get("/users/:id", function(req, res){
+    res.send(`Товар `);
 });
-router.use("/", function(request, response){
-    response.send("Список товаров");
+router.post("/users", function(req, res){
+    res.send("Добавление товара");
 });
+router.delete("/users/:id", function(req, res){
+    res.send(`Товар `);
+});
+router.put("/users", function(req, res){
+    res.send("Изменение товара");
+});
+
+module.exports = router;

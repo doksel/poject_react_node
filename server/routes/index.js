@@ -1,7 +1,7 @@
-const admin = require('./admin');
 const api = require('./api');
+const admin = require('./admin');
 
 module.exports = {
-    admin,
-    api
-}
+    api,
+    admin
+};

@@ -5,7 +5,11 @@ const Users = require('./models/users');
 const app = express();
 
 // routers
-const admin = require('./routes/index');
+const routes = require('./routes/index');
+
+// === routes
+app.use('/api', routes.api);
+app.use('/admin', routes.admin);
 
 // sets and uses
 app.engine('ejs', engine);
@@ -48,9 +52,6 @@ app.post('/create', (req, res) => {
 
     res.redirect('/');
 });
-
-// === routes
-app.use('/admin', admin);
 
 
 module.exports = app;
