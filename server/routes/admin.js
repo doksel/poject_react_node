@@ -4,7 +4,7 @@ const Users = require('../models/users');
 
 router.get("/", function(req, res){
     Users.find({}).then(users => {
-        res.render('index',{users:users, data:data})
+        res.render('index',{users:users});
     })
 });
 router.get("/users/:id", function(req, res){

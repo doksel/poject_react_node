@@ -6,7 +6,6 @@ const app = express();
 
 // routers
 const routes = require('./routes/index');
-
 // === routes
 app.use('/api', routes.api);
 app.use('/admin', routes.admin);
