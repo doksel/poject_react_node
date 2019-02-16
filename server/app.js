@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
+const staticAsset = require('static-asset');
 const engine = require('ejs-mate');
-const Users = require('./models/users');
+const Users = require('./models/userData');
 const app = express();
 
 // routers
@@ -16,6 +17,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(staticAsset(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/javascrips',express.static(path.join(__dirname, 'node_modules', 'jquery','dist')));
 
@@ -28,10 +30,15 @@ let data = [
     }
 ]
 
+// app.get('/', (req, res) => {
+//     Users.find({}).then(users => {
+//         res.render('index',{users:users, data:data})
+//     });
+// });
 app.get('/', (req, res) => {
     Users.find({}).then(users => {
-        res.render('index',{users:users, data:data})
-    })
+        res.render('register',{users:users, data:data})
+    });
 });
 app.get('/users', (req, res) => {
     Users.find({}).then(users => {

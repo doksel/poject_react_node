@@ -71,4 +71,21 @@ body {
   .site_inner {
     display: flex; }
 
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 20px; }
+  form label, form input {
+    margin-bottom: 10px; }
+  form input {
+    padding: 10px 20px; }
+  form button {
+    width: 150px;
+    height: 40px;
+    margin: 0 auto 20px; }
+
+.form-register {
+  display: none; }
+
 /*# sourceMappingURL=style.css.map*/
