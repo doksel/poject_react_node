@@ -4,6 +4,7 @@ const staticAsset = require('static-asset');
 const engine = require('ejs-mate');
 const Users = require('./models/userData');
 const app = express();
+const config = require('./config');
 
 // routers
 const routes = require('./routes/index');
@@ -59,5 +60,21 @@ app.post('/create', (req, res) => {
     res.redirect('/');
 });
 
+
+// error 404
+app.use((req, res, next) => {
+    const err = new Error('Not found');
+    err.status = 404;
+    next(err);
+});
+// error 500
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
+    res.render('error', {
+        message: error.message,
+        error: !config.IS_PRODUCTION ? error : {},
+        title: 'Oops... error 500'
+    })
+});
 
 module.exports = app;
