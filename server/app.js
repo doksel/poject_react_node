@@ -1,23 +1,19 @@
 const express = require('express');
 const path = require('path');
+const app = express();
 const staticAsset = require('static-asset');
 const engine = require('ejs-mate');
 const Users = require('./models/userData');
-const app = express();
 const config = require('./config');
+const routes = require('./routes');
 
-// routers
-const routes = require('./routes/index');
-// === routes
-app.use('/api', routes.api);
-app.use('/admin', routes.admin);
 
 // sets and uses
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(staticAsset(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/javascrips',express.static(path.join(__dirname, 'node_modules', 'jquery','dist')));
@@ -31,15 +27,18 @@ let data = [
     }
 ]
 
+// routes
 // app.get('/', (req, res) => {
 //     Users.find({}).then(users => {
 //         res.render('index',{users:users, data:data})
 //     });
 // });
+
+// app.use('/api', routes.api);
+app.use('/admin', routes.admin);
+
 app.get('/', (req, res) => {
-    Users.find({}).then(users => {
-        res.render('register',{users:users, data:data})
-    });
+    res.render('register');
 });
 app.get('/users', (req, res) => {
     Users.find({}).then(users => {

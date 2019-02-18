@@ -1,21 +1,21 @@
-const mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    randomStr = require('randomstring');
+// const mongoose = require('mongoose'),
+//     Schema = mongoose.Schema;
+//     randomStr = require('randomstring');
 
-const smsCodeSchema = new Schema({
-    code: {
-        type: String,
-        default: () => randomStr.generate({length: 6, readable: true})
-    },
-    phone: {
-        type: String,
-        unique: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-        expires: 120
-    }
-});
+// const smsCodeSchema = new Schema({
+//     code: {
+//         type: String,
+//         default: () => randomStr.generate({length: 6, readable: true})
+//     },
+//     phone: {
+//         type: String,
+//         unique: true
+//     },
+//     createdAt: {
+//         type: Date,
+//         default: Date.now,
+//         expires: 120
+//     }
+// });
 
-module.exports = mongoose.model('smsCode', smsCodeSchema);
+// module.exports = mongoose.model('smsCode', smsCodeSchema);
