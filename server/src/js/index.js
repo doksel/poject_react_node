@@ -24,6 +24,7 @@ if(btnRegister){
 if(btnLogin){
     btnLogin.addEventListener('click', (e)=>{
         e.preventDefault();
+        service.deleteUser('5c71bdde8d15851f6898561c');
         console.log('btnLogin');
     });
 };

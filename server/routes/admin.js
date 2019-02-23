@@ -34,36 +34,49 @@ router.post("/register", (req, res)=>{
             fields: ['password', 'passwordConfirm']
         });
     } else{
-        bcrypt.hash(password, null, null ,(err, hash) => {
-            models.userRegister.create({
-                login,
-                email,
-                password: hash
-            }).then(user => {
-                console.log(user);
-                res.json({
-                    ok: true
-                })
-            }).catch(err => {
-                console.log(err);
+        models.userRegister.findOne({
+            login
+        }).then(user => {
+            if(!user){
+                bcrypt.hash(password, null, null ,(err, hash) => {
+                    models.userRegister.create({
+                        login,
+                        email,
+                        password: hash
+                    }).then(user => {
+                        console.log(user);
+                        res.json({
+                            ok: true
+                        })
+                    }).catch(err => {
+                        console.log(err);
+                        res.json({
+                            ok: false,
+                            error: 'Ошибка, попробуйте позже!'
+                        })
+                    })
+                });
+                res.redirect('/create');
+            }else{
                 res.json({
                     ok: false,
-                    error: 'Ошибка, попробуйте позже!'
-                })
-            })
-        });
-        res.redirect('/');
+                    error: 'Имя занято!',
+                    fields: ['login']
+                });
+            }
+        })
     }
 
 });
 
-router.put('/register', (req, res) => {
+router.put('/', (req, res) => {
     console.log('put userRegister');
     console.log(req.body);
 });
 
-router.delete('/register', (req, res) => {
+router.delete('/', (req, res) => {
     console.log('delete userRegister');
-    console.log(req.body);
+    console.log(res.body);
+    models.userRegister.deleteOne({login:req.body.login});
 });
 module.exports = router;

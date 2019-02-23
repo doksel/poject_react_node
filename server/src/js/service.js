@@ -10,6 +10,22 @@ module.exports = {
             passwordConfirm: document.querySelector('#registerConfirmPassword').value,
         });
         return promise.then((response) => {
+            console.log(response.data);
+            const data = response.data;
+            const spanError = document.querySelector('.error');
+            spanError.innerHTML = '';
+            if(!data.ok){
+                spanError.innerHTML = response.data.error;
+                if(data.fields){
+                    data.fields.forEach(item => {
+                        // console.log(document.querySelector(`input[name=${item}]`))
+                        document.querySelector(`input[name=${item}]`).style.backgroundColor='red'; 
+                    });
+                };
+            }else{
+                spanError.innerHTML = response.data.error;
+
+            }
             return response.data;
         });
     },
@@ -17,6 +33,7 @@ module.exports = {
     getAllUsers(){
         const promise = axios.get('/admin/register');
         return promise.then((response) => {
+            console.log(response.data);
             return response.data;
         });
     },
@@ -30,8 +47,8 @@ module.exports = {
         });
     },
         
-    deleteUser(id){
-        const promise = axios.delete(`/admin/register`);
+    deleteUser(login){
+        const promise = axios.delete(`/admin?login=${login}`);
         return promise.then((response) => {
             return response.data;
         });

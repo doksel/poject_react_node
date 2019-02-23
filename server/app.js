@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const staticAsset = require('static-asset');
 const engine = require('ejs-mate');
-const Users = require('./models/userData');
+const models = require('./models');
 const config = require('./config');
 const routes = require('./routes');
 
@@ -29,7 +29,7 @@ let data = [
 
 // routes
 app.get('/', (req, res) => {
-    Users.find({}).then(users => {
+    models.userData.find({}).then(users => {
         res.render('index',{users:users,data:data});
     });
 });
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 app.use('/admin', routes.admin);
 
 app.get('/users', (req, res) => {
-    Users.find({}).then(users => {
+    models.userData.find({}).then(users => {
         res.render('users',{users:users})
     })
 });
@@ -46,7 +46,7 @@ app.get('/create', (req, res) => res.render('create'));
 app.post('/create', (req, res) => {
     const{name, sername, age} = req.body;
 
-    Users.create({
+    models.userData.create({
         name,
         sername,
         age

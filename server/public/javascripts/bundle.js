@@ -2017,6 +2017,7 @@ if (btnRegister) {
 if (btnLogin) {
     btnLogin.addEventListener('click', function (e) {
         e.preventDefault();
+        service.deleteUser('5c71bdde8d15851f6898561c');
         console.log('btnLogin');
     });
 };
@@ -2068,12 +2069,28 @@ module.exports = {
             passwordConfirm: document.querySelector('#registerConfirmPassword').value
         });
         return promise.then(function (response) {
+            console.log(response.data);
+            var data = response.data;
+            var spanError = document.querySelector('.error');
+            spanError.innerHTML = '';
+            if (!data.ok) {
+                spanError.innerHTML = response.data.error;
+                if (data.fields) {
+                    data.fields.forEach(function (item) {
+                        // console.log(document.querySelector(`input[name=${item}]`))
+                        document.querySelector('input[name=' + item + ']').style.backgroundColor = 'red';
+                    });
+                };
+            } else {
+                spanError.innerHTML = response.data.error;
+            }
             return response.data;
         });
     },
     getAllUsers: function getAllUsers() {
         var promise = axios.get('/admin/register');
         return promise.then(function (response) {
+            console.log(response.data);
             return response.data;
         });
     },
@@ -2083,8 +2100,8 @@ module.exports = {
             return response.data;
         });
     },
-    deleteUser: function deleteUser(id) {
-        var promise = axios.delete('/admin/register');
+    deleteUser: function deleteUser(login) {
+        var promise = axios.delete('/admin?login=' + login);
         return promise.then(function (response) {
             return response.data;
         });
