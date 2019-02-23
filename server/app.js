@@ -28,18 +28,14 @@ let data = [
 ]
 
 // routes
-// app.get('/', (req, res) => {
-//     Users.find({}).then(users => {
-//         res.render('index',{users:users, data:data})
-//     });
-// });
+app.get('/', (req, res) => {
+    Users.find({}).then(users => {
+        res.render('index',{users:users,data:data});
+    });
+});
 
-// app.use('/api', routes.api);
 app.use('/admin', routes.admin);
 
-app.get('/', (req, res) => {
-    res.render('register');
-});
 app.get('/users', (req, res) => {
     Users.find({}).then(users => {
         res.render('users',{users:users})

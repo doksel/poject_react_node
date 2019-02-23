@@ -3,8 +3,13 @@ const router = express.Router();
 const bcrypt = require('bcrypt-nodejs');
 const models = require('../models');
 
-router.post("/register", (req, res)=>{
+router.get('/', (req, res) => {
+    console.log('get userRegister');
+    res.render('register');
+});
 
+router.post("/register", (req, res)=>{
+    console.log(req.body);
     const login = req.body.login;
     const email = req.body.email;
     const password = req.body.password;
@@ -46,9 +51,19 @@ router.post("/register", (req, res)=>{
                     error: 'Ошибка, попробуйте позже!'
                 })
             })
-        })
+        });
+        res.redirect('/');
     }
 
 });
 
+router.put('/register', (req, res) => {
+    console.log('put userRegister');
+    console.log(req.body);
+});
+
+router.delete('/register', (req, res) => {
+    console.log('delete userRegister');
+    console.log(req.body);
+});
 module.exports = router;
