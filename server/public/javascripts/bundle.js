@@ -2010,7 +2010,13 @@ if (changeRegister) {
 if (btnRegister) {
     btnRegister.addEventListener('click', function (e) {
         e.preventDefault();
-        service.registration();
+        var data = {
+            login: document.querySelector('#registerUsername').value,
+            email: document.querySelector('#registerEmail').value,
+            password: document.querySelector('#registerPassword').value,
+            passwordConfirm: document.querySelector('#registerConfirmPassword').value
+        };
+        service.registration(data).then(validateRegister);
     });
 };
 
@@ -2020,6 +2026,23 @@ if (btnLogin) {
         service.deleteUser('5c71bdde8d15851f6898561c');
         console.log('btnLogin');
     });
+};
+
+function validateRegister(response) {
+    console.log(response.data);
+    var data = response.data;
+    var spanError = document.querySelector('.error');
+    spanError.innerHTML = '';
+    if (!data.ok) {
+        spanError.innerHTML = response.data.error;
+        if (data.fields) {
+            data.fields.forEach(function (item) {
+                document.querySelector('input[name=' + item + ']').style.backgroundColor = 'red';
+            });
+        };
+    } else {
+        spanError.innerHTML = 'Your were registering successfull';
+    }
 };
 
 /* eslint-disable no-undef */
@@ -2061,36 +2084,13 @@ if (btnLogin) {
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 module.exports = {
-    registration: function registration() {
-        var promise = axios.post('/admin/register', {
-            login: document.querySelector('#registerUsername').value,
-            email: document.querySelector('#registerEmail').value,
-            password: document.querySelector('#registerPassword').value,
-            passwordConfirm: document.querySelector('#registerConfirmPassword').value
-        });
-        return promise.then(function (response) {
-            console.log(response.data);
-            var data = response.data;
-            var spanError = document.querySelector('.error');
-            spanError.innerHTML = '';
-            if (!data.ok) {
-                spanError.innerHTML = response.data.error;
-                if (data.fields) {
-                    data.fields.forEach(function (item) {
-                        // console.log(document.querySelector(`input[name=${item}]`))
-                        document.querySelector('input[name=' + item + ']').style.backgroundColor = 'red';
-                    });
-                };
-            } else {
-                spanError.innerHTML = response.data.error;
-            }
-            return response.data;
-        });
+    registration: function registration(data) {
+        var promise = axios.post('/admin/register', data);
+        return promise;
     },
     getAllUsers: function getAllUsers() {
         var promise = axios.get('/admin/register');
         return promise.then(function (response) {
-            console.log(response.data);
             return response.data;
         });
     },

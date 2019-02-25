@@ -17,7 +17,14 @@ if(changeRegister){
 if(btnRegister){
     btnRegister.addEventListener('click', (e)=>{
         e.preventDefault();
-        service.registration();
+        let data = {
+            login: document.querySelector('#registerUsername').value,
+            email: document.querySelector('#registerEmail').value,
+            password: document.querySelector('#registerPassword').value,
+            passwordConfirm: document.querySelector('#registerConfirmPassword').value,
+        };
+        service.registration(data)
+        .then(validateRegister);
     });
 };
 
@@ -28,6 +35,24 @@ if(btnLogin){
         console.log('btnLogin');
     });
 };
+
+function validateRegister(response) {
+    console.log(response.data);
+    const data = response.data;
+    const spanError = document.querySelector('.error');
+    spanError.innerHTML = '';
+    if(!data.ok){
+        spanError.innerHTML = response.data.error;
+        if(data.fields){
+            data.fields.forEach(item => {
+                document.querySelector(`input[name=${item}]`).style.backgroundColor='red'; 
+            });
+        };
+    }else{
+        spanError.innerHTML = 'Your were registering successfull';
+    }
+};
+
 
 /* eslint-disable no-undef */
 
