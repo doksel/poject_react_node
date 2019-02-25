@@ -31,8 +31,12 @@ if(btnRegister){
 if(btnLogin){
     btnLogin.addEventListener('click', (e)=>{
         e.preventDefault();
-        service.deleteUser('5c71bdde8d15851f6898561c');
-        console.log('btnLogin');
+        let data = {
+            login: document.querySelector('#loginUsername').value,
+            password: document.querySelector('#loginPassword').value,
+        };
+        console.log(data);
+        service.login(data).then(validateRegister);
     });
 };
 

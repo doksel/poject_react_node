@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
     res.render('register');
 });
 
+// POST is register
 router.post("/register", (req, res)=>{
     console.log(req.body);
     const login = req.body.login;
@@ -16,10 +17,20 @@ router.post("/register", (req, res)=>{
     const passwordConfirm = req.body.passwordConfirm;
 
     if(!login || !password || !passwordConfirm){
+        const fields = [];
+        if(!login) fields.push('login');
+        if(!password) fields.push('password');
+        if(!passwordConfirm) fields.push('passwordConfirm');
         res.json({
             ok: false,
             error: 'Все поля должны быть заполнены!',
-            fields: ['login', 'email', 'password', 'passwordConfirm']
+            fields
+        });
+    } else if(!/^[a-zA-Z0-9]+$/.test(login)){
+        res.json({
+            ok: false,
+            error: 'Только латинские буквы и цифры!',
+            fields: ['login']
         });
     } else if(login.length < 3 || login.length > 16){
         res.json({
@@ -66,7 +77,45 @@ router.post("/register", (req, res)=>{
             }
         })
     }
+});
 
+// POST is login
+router.post("/login", (req, res)=>{
+    const login = req.body.login;
+    const password = req.body.password;
+    if(!login || !password){
+        const fields = [];
+        if(!login) fields.push('login');
+        if(!password) fields.push('password');
+        res.json({
+            ok: false,
+            error: 'Все поля должны быть заполнены!',
+            fields
+        });
+    } else(
+        models.userRegister.findOne({
+            login
+        }).then(user => {
+            if(!user){
+                res.json({
+                    ok: false,
+                    error: 'Логин и пароль не верны!',
+                    fields: ['login', 'password']
+                });
+            } else{
+                bcrypt.compare(password, user.password, function(err, result) {
+                    console.log(result);
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                ok: false,
+                error: 'Ошибка, попробуйте позже!'
+            })
+        })
+    )
 });
 
 router.put('/', (req, res) => {

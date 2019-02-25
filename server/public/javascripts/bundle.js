@@ -2023,8 +2023,12 @@ if (btnRegister) {
 if (btnLogin) {
     btnLogin.addEventListener('click', function (e) {
         e.preventDefault();
-        service.deleteUser('5c71bdde8d15851f6898561c');
-        console.log('btnLogin');
+        var data = {
+            login: document.querySelector('#loginUsername').value,
+            password: document.querySelector('#loginPassword').value
+        };
+        console.log(data);
+        service.login(data).then(validateRegister);
     });
 };
 
@@ -2086,6 +2090,10 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 module.exports = {
     registration: function registration(data) {
         var promise = axios.post('/admin/register', data);
+        return promise;
+    },
+    login: function login(data) {
+        var promise = axios.post('/admin/login', data);
         return promise;
     },
     getAllUsers: function getAllUsers() {

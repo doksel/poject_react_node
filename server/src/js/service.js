@@ -7,6 +7,11 @@ module.exports = {
         return promise;
     },
 
+    login(data){
+        const promise = axios.post('/admin/login', data);
+        return promise;
+    },
+
     getAllUsers(){
         const promise = axios.get('/admin/register');
         return promise.then((response) => {
