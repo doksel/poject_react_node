@@ -2035,17 +2035,35 @@ if (btnLogin) {
 function validateRegister(response) {
     console.log(response.data);
     var data = response.data;
-    var spanError = document.querySelector('.error');
-    spanError.innerHTML = '';
+    var spanError = document.querySelectorAll('.error');
+
     if (!data.ok) {
-        spanError.innerHTML = response.data.error;
+        if (spanError) {
+            spanError.forEach(function (item) {
+                item.innerHTML = '';
+                item.innerHTML = response.data.error;
+            });
+        };
         if (data.fields) {
             data.fields.forEach(function (item) {
-                document.querySelector('input[name=' + item + ']').style.backgroundColor = 'red';
+                var input = document.querySelectorAll('input[name=' + item + ']');
+                if (input) {
+                    input.forEach(function (item) {
+                        item.style.backgroundColor = 'red';
+                    });
+                };
             });
         };
     } else {
-        spanError.innerHTML = 'Your were registering successfull';
+        if (spanError) {
+            spanError.forEach(function (item) {
+                item.innerHTML = '';
+                item.innerHTML = 'Your were registering successfull';
+            });
+        };
+        setTimeout(function () {
+            location = "/";
+        }, 3000);
     }
 };
 

@@ -9,5 +9,6 @@ module.exports = {
     // MONGO_URL: 'mongodb://localhost:27017/mydb',
     MONGO_URL: process.env.MONGO_URL,
     IS_PRODUCTION: process.env.NODE_EVN === 'production',
-    jwtSecret: 'secret doksel'
+    SESSION_SECRET: process.env.SESSION_SECRET,
+    jwtSecret: 'secretdoksel'
 };

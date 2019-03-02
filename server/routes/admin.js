@@ -104,7 +104,11 @@ router.post("/login", (req, res)=>{
                 });
             } else{
                 bcrypt.compare(password, user.password, function(err, result) {
-                    console.log(result);
+                    if(result){
+                        res.json({
+                            ok: true
+                        });
+                    }
                 });
             }
         })

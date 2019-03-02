@@ -36,24 +36,43 @@ if(btnLogin){
             password: document.querySelector('#loginPassword').value,
         };
         console.log(data);
-        service.login(data).then(validateRegister);
+        service.login(data)
+        .then(validateRegister);
     });
 };
 
 function validateRegister(response) {
     console.log(response.data);
     const data = response.data;
-    const spanError = document.querySelector('.error');
-    spanError.innerHTML = '';
+    const spanError = document.querySelectorAll('.error');
+
     if(!data.ok){
-        spanError.innerHTML = response.data.error;
-        if(data.fields){
-            data.fields.forEach(item => {
-                document.querySelector(`input[name=${item}]`).style.backgroundColor='red'; 
+        if(spanError){
+            spanError.forEach(item => {
+                item.innerHTML = '';
+                item.innerHTML = response.data.error; 
             });
         };
-    }else{
-        spanError.innerHTML = 'Your were registering successfull';
+        if(data.fields){
+            data.fields.forEach(item => {
+                let input = document.querySelectorAll(`input[name=${item}]`);
+                if(input){
+                    input.forEach(item => {
+                        item.style.backgroundColor='red'; 
+                    });
+                };
+            });
+        };
+    }else{        
+        if(spanError){
+            spanError.forEach(item => {
+                item.innerHTML = '';
+                item.innerHTML = 'Your were registering successfull'; 
+            });
+        };
+        setTimeout(() => {
+            location="/";
+        },3000);
     }
 };
 
