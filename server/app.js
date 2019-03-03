@@ -7,7 +7,21 @@ const models = require('./models');
 const config = require('./config');
 const routes = require('./routes');
 
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
+
+// sessions
+app.use(
+    session({
+        secret: config.SESSION_SECRET,
+        resave: true,
+        saveUinitialized: false,
+        store: new MongoStore({
+            mongoConnection: mongoose.connection
+        })
+    })
+);
 // sets and uses
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views');
@@ -29,6 +43,8 @@ let data = [
 
 // routes
 app.get('/', (req, res) => {
+    const id = req.session.userId;
+    const login = req.session.userLogin;
     models.userData.find({}).then(users => {
         res.render('index',{users:users,data:data});
     });

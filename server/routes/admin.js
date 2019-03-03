@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt-nodejs');
 const models = require('../models');
 
 router.get('/', (req, res) => {
-    console.log('get userRegister');
     res.render('register');
 });
 
