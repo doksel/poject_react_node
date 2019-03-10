@@ -2,8 +2,8 @@
     "ignore": ["node_modules", "dev", "public"],
     "env": {
         "NODE_ENV": "development",
-        "PORT": 3001,
-        "MONGO_URL": "mongodb://localhost:27017/mydb"
+        "PORT": 5001,
+        "MONGO_URL": "mongodb://localhost:27017/myData"
     },
     "ext": ".js,.json",
     "watch": "./"

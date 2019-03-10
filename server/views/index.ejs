@@ -7,8 +7,8 @@
     <a href="/create">add new</a>
     <div><h3>All personal data:</h3></div>
     <% users.forEach((user)=>{ %>
-        <div><span>name: </span><span><%= user.name %></span></div>
-        <div><span>sername: </span><span><%= user.sername %></span></div>
-        <div><span>age: </span><span><%= user.age %></span></div>
+        <div><span>login: </span><span><%= user.login %></span></div>
+        <div><span>email: </span><span><%= user.email %></span></div>
+        <div><span>date created: </span><span><%= user.createdAt %></span></div>
     <% }) %>
 </div>

@@ -58,7 +58,7 @@ function validateRegister(response) {
                 let input = document.querySelectorAll(`input[name=${item}]`);
                 if(input){
                     input.forEach(item => {
-                        item.style.backgroundColor='red'; 
+                        item.style.borderColor='red'; 
                     });
                 };
             });
@@ -67,8 +67,9 @@ function validateRegister(response) {
         if(spanError){
             spanError.forEach(item => {
                 item.innerHTML = '';
-                item.innerHTML = 'Your were registering successfull'; 
+                item.innerHTML = 'Вы успешео зарегистрировалиь!!!';
             });
+            resetInputValue();
         };
         setTimeout(() => {
             location="/";
@@ -76,27 +77,12 @@ function validateRegister(response) {
     }
 };
 
-
-/* eslint-disable no-undef */
-
-// $(function(){
-//     $('.btn-register').click((e)=>{
-//         e.preventDefault();
-//         const data = {
-//             login: $('#registerUsername').val(),
-//             email: $('#registerEmail').val(),
-//             password: $('#registerPassword').val(),
-//             passwordConfirm: $('#registerConfirmPassword').val()
-//         };
-//         $.ajax({
-//             type: 'POST',
-//             data: JSON.stringify(data),
-//             contentType: 'application/json',
-//             url: '/admin/register'
-//         }).done((data)=>{
-//             console.log(data);
-//         });
-//     });
-// });
-
-/* eslint-enable no-undef */
+function resetInputValue (){
+    let input = document.querySelectorAll(`input`);
+    if(input){
+        input.forEach(item => {
+            item.value = '';
+            item.style.borderColor='inherit';
+        });
+    };
+}

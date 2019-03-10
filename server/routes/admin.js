@@ -57,7 +57,8 @@ router.post("/register", (req, res)=>{
                         console.log(user);
                         res.json({
                             ok: true
-                        })
+                        });
+                        // res.redirect('/');
                     }).catch(err => {
                         console.log(err);
                         res.json({
@@ -66,7 +67,6 @@ router.post("/register", (req, res)=>{
                         })
                     })
                 });
-                res.redirect('/create');
             }else{
                 res.json({
                     ok: false,
@@ -103,10 +103,19 @@ router.post("/login", (req, res)=>{
                 });
             } else{
                 bcrypt.compare(password, user.password, function(err, result) {
-                    if(result){
+                    if(!result){
+                        res.json({
+                            ok: false,
+                            error: 'Логин и пароль не верны!',
+                            fields: ['login', 'password']
+                        });
+                    }else{
+                        // req.session.userId = user.id;
+                        // req.session.userLogin = user.login;
                         res.json({
                             ok: true
                         });
+                        res.render('index');
                     }
                 });
             }

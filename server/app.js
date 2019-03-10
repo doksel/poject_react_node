@@ -12,16 +12,17 @@ const MongoStore = require('connect-mongo')(session);
 
 
 // sessions
-app.use(
-    session({
-        secret: config.SESSION_SECRET,
-        resave: true,
-        saveUinitialized: false,
-        store: new MongoStore({
-            mongoConnection: mongoose.connection
-        })
-    })
-);
+// app.use(
+//     session({
+//         secret: config.SESSION_SECRET,
+//         resave: true,
+//         saveUinitialized: false,
+//         store: new MongoStore({
+//             mongoConnection: mongoose.connection
+//         })
+//     })
+// );
+
 // sets and uses
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views');
@@ -43,9 +44,9 @@ let data = [
 
 // routes
 app.get('/', (req, res) => {
-    const id = req.session.userId;
-    const login = req.session.userLogin;
-    models.userData.find({}).then(users => {
+    // const id = req.session.userId;
+    // const login = req.session.userLogin;
+    models.userRegister.find({}).then(users => {
         res.render('index',{users:users,data:data});
     });
 });
@@ -53,7 +54,7 @@ app.get('/', (req, res) => {
 app.use('/admin', routes.admin);
 
 app.get('/users', (req, res) => {
-    models.userData.find({}).then(users => {
+    models.userRegister.find({}).then(users => {
         res.render('users',{users:users})
     })
 });

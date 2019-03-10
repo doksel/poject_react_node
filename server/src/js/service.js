@@ -13,14 +13,14 @@ module.exports = {
     },
 
     getAllUsers(){
-        const promise = axios.get('/admin/register');
+        const promise = axios.get('/admin/allusers');
         return promise.then((response) => {
             return response.data;
         });
     },
     
     updateUser(id){
-        const promise = axios.put('/admin/register',{
+        const promise = axios.put(`/admin/user/:${id}`,{
         });
         return promise.then((response) => {
             return response.data;
