@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 let Contacts = (props) => {
+
     return(
     <div className="contacts">
-        contacts
+        about us
     </div>
     )
 }

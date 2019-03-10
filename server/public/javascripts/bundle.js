@@ -2102,19 +2102,19 @@ module.exports = {
         return promise;
     },
     getAllUsers: function getAllUsers() {
-        var promise = axios.get('/admin/allusers');
+        var promise = axios.get('/api/allusers');
         return promise.then(function (response) {
             return response.data;
         });
     },
     updateUser: function updateUser(id) {
-        var promise = axios.put('/admin/user/:' + id, {});
+        var promise = axios.put('/api/user/:' + id, {});
         return promise.then(function (response) {
             return response.data;
         });
     },
     deleteUser: function deleteUser(login) {
-        var promise = axios.delete('/admin?login=' + login);
+        var promise = axios.delete('/api?login=' + login);
         return promise.then(function (response) {
             return response.data;
         });

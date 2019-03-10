@@ -13,14 +13,14 @@ module.exports = {
     },
 
     getAllUsers(){
-        const promise = axios.get('/admin/allusers');
+        const promise = axios.get('/api/allusers');
         return promise.then((response) => {
             return response.data;
         });
     },
     
     updateUser(id){
-        const promise = axios.put(`/admin/user/:${id}`,{
+        const promise = axios.put(`/api/user/:${id}`,{
         });
         return promise.then((response) => {
             return response.data;
@@ -28,7 +28,7 @@ module.exports = {
     },
         
     deleteUser(login){
-        const promise = axios.delete(`/admin?login=${login}`);
+        const promise = axios.delete(`/api?login=${login}`);
         return promise.then((response) => {
             return response.data;
         });

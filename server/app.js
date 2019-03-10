@@ -52,6 +52,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/admin', routes.admin);
+app.use('/api', routes.api);
 
 app.get('/users', (req, res) => {
     models.userRegister.find({}).then(users => {
