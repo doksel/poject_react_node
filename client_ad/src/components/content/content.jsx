@@ -9,6 +9,7 @@ import { Route } from "react-router-dom";
 let Content = (props) => {
     return(
     <div className="content">
+        {/* <Route path="/" component={Home} /> */}
         <Route path="/about" component={About} />
         <Route path="/news" component={News} />
         <Route path="/contacts" component={Contacts} />
