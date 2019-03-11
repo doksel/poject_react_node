@@ -12,16 +12,24 @@ class App extends Component {
     this.state = {users:[]};
   }
   componentDidMount() {
-    fetch("http://localhost:3001/api/users")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            users: result.users
-          });
-          console.log(result)
-        })
-      }
+    // using fetch
+    // fetch("http://localhost:3001/api/users")
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //       this.setState({
+    //         users: result.users
+    //       });
+    //     })
+
+    // using axios
+    axios.get("http://localhost:3001/api/users")
+    .then(res => {
+      this.setState({
+        users: res.data.users
+      });
+    })
+  }
   render() {
     const { users } = this.state;
     return (
