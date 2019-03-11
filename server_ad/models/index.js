@@ -1,7 +1,7 @@
-const post = require('./post');
-const userRegister = require('./userRegister');
-const userData = require('./userData');
-const smsCodeModel = require('./smsCodeModel');
+import post from './post';
+import userRegister from './userRegister';
+import userData from './userData';
+import smsCodeModel from './smsCodeModel';
 
 module.exports = {
     post,

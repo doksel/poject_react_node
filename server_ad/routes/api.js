@@ -1,25 +1,18 @@
-const express = require("express");
+import express from "express";
+import models from '../models';
 const router = express.Router();
-const models = require('../models');
-let data = [
-    {
-        id: 1,
-        name: 'Andriy',
-        sername: 'Fedorchenko',
-        age: 40
-    }
-]
+
+
 router.get('/users', (req, res) => {
     models.userData.find({}).then(users => {
         res.json({users});
     });
-    // res.json({data})
 });
 router.post("/users", (req, res) => {
     res.send("Добавление пользователя");
 });
 router.get("/users/:id", function(req, res){
-    res.send(`Товар = ${req.params.id}`);
+    res.send(`Пользователь = ${req.params.id}`);
 });
 router.delete("/users/:id", function(req, res){
     res.send(`Удаление пользователя`);

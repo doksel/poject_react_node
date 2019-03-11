@@ -1,14 +1,15 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const staticAsset = require('static-asset');
-const engine = require('ejs-mate');
-const models = require('./models');
-const config = require('./config');
-const routes = require('./routes');
-const cors = require('cors')
+import express from 'express';
+import path from 'path';
+import staticAsset from 'static-asset';
+import engine from 'ejs-mate';
+import models from './models';
+import config from './config';
+import routes from './routes';
+import cors from 'cors';
 
-const session = require('express-session');
+const app = express();
+
+import session from 'express-session';
 const MongoStore = require('connect-mongo')(session);
 
 
