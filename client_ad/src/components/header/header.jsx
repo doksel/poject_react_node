@@ -4,7 +4,7 @@ import Navbar from './navbar/navbar';
 
 let Header = () => {
     return(
-    <header className="App-header">
+    <header className="header">
         <HeaderTop />
         <Navbar />
     </header>

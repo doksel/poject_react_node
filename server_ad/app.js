@@ -6,6 +6,7 @@ const engine = require('ejs-mate');
 const models = require('./models');
 const config = require('./config');
 const routes = require('./routes');
+const cors = require('cors')
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -23,6 +24,7 @@ const MongoStore = require('connect-mongo')(session);
 //     })
 // );
 
+app.use(cors());
 // sets and uses
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views');

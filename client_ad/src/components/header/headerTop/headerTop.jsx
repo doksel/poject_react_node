@@ -4,7 +4,7 @@ import logo from './../../../logo.svg';
 let HeaderTop = () => {
     return(
         <div className="headr-top">
-            <img className="App-logo" src={logo} alt="app-logo"/>
+            <img className="logo" src={logo} alt="app-logo"/>
         </div>
     )
 }
