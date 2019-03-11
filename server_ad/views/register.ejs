@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Adminpanel</title>
+    <link rel="stylesheet" href="<%= assetFingerprint('/stylesheets/style.css') %>">
+</head>
+<body>
+    <form class="form-register" action="/users/register" method="POST">
+        <h2 class="form-register-heading">Please register</h2>
+       
+        <label for="registerEmail" class="sr-only">Email address</label>
+        <input type="email" id="registerEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+       
+        <label for="registerUsername" class="sr-only">Username</label>
+        <input type="text" id="registerUsername" name="login" class="form-control" placeholder="Username" required>
+       
+        <label for="registerPassword" class="sr-only">Password</label>
+        <input type="password" id="registerPassword" name="password" class="form-control" placeholder="Password" required>
+       
+        <label for="registerConfirmPassword" class="sr-only">Confirm Password</label>
+        <input type="password" id="registerConfirmPassword" name="passwordConfirm" class="form-control" placeholder="Confirm Password" required>
+        <span class="error"></span>
+        <button class="btn-register" type="submit">Register</button>
+    </form>
+    
+    <form class="form-login" action="/users/register" method="POST">
+        <h2 class="form-signin-heading">Please login</h2>
+        
+        <label for="loginUsername" class="sr-only">Username</label>
+        <input type="text" id="loginUsername" name="login" class="form-control" placeholder="Username" required>
+        
+        <label for="loginPassword" class="sr-only">Password</label>
+        <input type="password" id="loginPassword" name="password" class="form-control" placeholder="Password" required>
+        <span class="error"></span>
+
+        <button class="btn-login" type="submit">Login</button>
+        <button class="change-register" type="submit">Register</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="<%= assetFingerprint('/javascripts/bundle.js') %>"></script>
+</body>
+</html>
