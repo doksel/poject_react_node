@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Main from "./main/main";
 import About from "./about/about";
 import News from "./news/news";
 import Contacts from "./contacts/contacts";
@@ -9,6 +10,7 @@ import { Route } from "react-router-dom";
 let Content = (props) => {
     return(
     <div className="content">
+        <Route exact path="/" component={Main} />
         <Route path="/about" component={About} />
         <Route path="/news" component={News} />
         <Route path="/contacts" component={Contacts} />

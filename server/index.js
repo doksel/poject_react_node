@@ -1,6 +1,6 @@
-const app = require('./app');
-const config = require('./config');
-const db = require('./db/db');
+import app from './app';
+import config from './config';
+import db from './db/db';
 
 db().then( info => {
     console.log(`Connected to ${info.host}:${info.port}/${info.name}`)
