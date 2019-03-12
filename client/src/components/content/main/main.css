@@ -27,3 +27,15 @@
         text-indent:0
     }
 }
+
+/* gallery */
+
+.gallery{
+    margin: 50px 0;
+}
+.wrap_foto{
+    padding: 5px;
+}
+.foto{
+    width: 100%;
+}
