@@ -9,7 +9,7 @@ import Slider from "react-slick";
 export default class Gallery extends Component {
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
@@ -27,12 +27,14 @@ export default class Gallery extends Component {
     ];
     return (
       <div className="container">
-        <div className="gallery">
-            <h2>Gallery</h2>
+        <div className="gallery_inner">
+            {/* <h2>Gallery</h2> */}
             <Slider {...settings}>
                 {listFoto.map(foto => (
                     <div className="wrap_foto" key={foto.id}>
-                        <img className="foto" src={foto} alt="image"/>
+                        <div className="wrap_foto_inner">
+                            <img className="foto" src={foto} alt="image"/>
+                        </div>
                     </div>
                 ))}
             </Slider>

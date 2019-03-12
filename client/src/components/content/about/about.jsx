@@ -1,11 +1,42 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
-let Contacts = (props) => {
+export default class Contacts extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {users:[]};
+    }
+    componentDidMount() {
+        // using fetch
+        // fetch("http://localhost:3001/api/users")
+        //   .then(res => res.json())
+        //   .then(
+        //     (result) => {
+        //       this.setState({
+        //         users: result.users
+        //       });
+        //     })
 
-    return(
-    <div className="contacts">
-        about us
-    </div>
-    )
+        // using axios
+        axios.get("http://localhost:3001/api/users")
+        .then(res => {
+            this.setState({
+                users: res.data.users
+            });
+        })
+    }
+    render() {
+        const { users } = this.state;
+        return(
+        <div className="contacts">
+            news
+            <h1>Our users</h1>
+            {users.map(user => (
+                <div key={user.name}>
+                {user.name} {user.sername}
+                </div>
+            ))}
+        </div>
+        )
+    }
 }
-export default Contacts;

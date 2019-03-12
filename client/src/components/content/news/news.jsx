@@ -1,42 +1,47 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import NewPost from './newPost';
+
+import Login from './../login/login';
 
 class News extends Component {
     constructor(props) {
         super(props);
-        this.state = {users:[]};
+        this.state = {users:[],posts:[]};
     }
     componentDidMount() {
-        // using fetch
-        // fetch("http://localhost:3001/api/users")
-        //   .then(res => res.json())
-        //   .then(
-        //     (result) => {
-        //       this.setState({
-        //         users: result.users
-        //       });
-        //     })
-
-        // using axios
-        axios.get("http://localhost:3001/api/users")
+        axios.get("http://localhost:3001/api/posts")
         .then(res => {
             this.setState({
-                users: res.data.users
+                posts: res.data.posts
             });
-        })
+        });
     }
     render() {
-        const { users } = this.state;
+        const { posts } = this.state;
         return(
-        <div className="news">
-            news
-            <h1>Our users</h1>
-            {users.map(user => (
-                <div key={user.name}>
-                {user.name} {user.sername}
+            <div className="cotainer">
+                <div className="news">
+                    <h1>News</h1>
+                    <h2>Our news</h2>
+                    {posts.map(user => (
+                        <div>
+                            <h3>{post.title}</h3>
+                            <div key={post.id}>
+                                {post.text}
+                            </div>
+                        </div>
+                    ))}
+                    <div className="login">
+                        <form id="login_form">
+                            <div className="form_inner">
+                                <textarea name="task" id="addTask" cols="30" rows="10"/>
+                                <button className="btn_form js-addTask">add task</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            ))}
-        </div>
+            </div>
         )
     }
 }

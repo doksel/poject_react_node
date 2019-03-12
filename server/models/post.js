@@ -1,14 +1,21 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const schema = new Schema({
+const Post = new Schema({
     title: {
         type: String,
         required : true
     },
-    body: {
-        type: String
+    text: {
+        type: String,
+    }
+}, {
+    timestamps: {
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt'
     }
 });
 
-module.exports - mongoose.model('Post', schema);
+Post.set('toJSON',{virtuals: true});
+
+module.exports - mongoose.model('Post', Post);

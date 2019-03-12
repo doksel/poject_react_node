@@ -31,10 +31,17 @@
 /* gallery */
 
 .gallery{
+    margin-top: -70px;
+}
+gallery_inner{
     margin: 50px 0;
 }
 .wrap_foto{
+    padding: 0 10px;
+}
+.wrap_foto_inner{
     padding: 5px;
+    background: #fff;
 }
 .foto{
     width: 100%;

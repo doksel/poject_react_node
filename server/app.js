@@ -58,12 +58,12 @@ app.use('/admin', routes.admin);
 app.use('/api', routes.api);
 
 app.get('/users', (req, res) => {
-    models.userRegister.find({}).then(users => {
+    models.post.find({}).then(users => {
         res.render('users',{users:users})
     })
 });
 
-app.get('/create', (req, res) => res.render('create'));
+app.get('/create', (req, res) => res.render('createUser'));
 app.post('/create', (req, res) => {
     const{name, sername, age} = req.body;
 
@@ -76,6 +76,17 @@ app.post('/create', (req, res) => {
     res.redirect('/');
 });
 
+app.get('/posts', (req, res) => res.render('createPost'));
+app.post('/posts', (req, res) => {
+    const{title, text} = req.body;
+
+    models.post.create({
+        title,
+        text
+    }).then(post => console.log('created', post.id))
+
+    res.redirect('/');
+});
 
 // error 404
 app.use((req, res, next) => {

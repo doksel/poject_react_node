@@ -3,8 +3,8 @@ import models from '../models';
 const router = express.Router();
 
 
-router.get('/posts', (req, res) => {
-    models.Post.find({}).then(posts => {
+router.get('/', (req, res) => {
+    models.post.find({}).then(posts => {
         res.json({posts});
     });
 });
