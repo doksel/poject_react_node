@@ -31,6 +31,36 @@ class News extends Component {
             });
         })
     }
+    updatePost = (e) => {
+        e.preventDefault();
+        let post = {
+            id: e.target.getAttribute('data-id'),
+        }
+        console.log(post.id)
+        axios.put("http://localhost:3001/api/posts",post)
+        .then(res => {
+            console.log(res)
+
+            // this.setState({
+            //     posts: res.data.post
+            // });
+        })
+    }
+    deletePost = (e) => {
+        e.preventDefault();
+        let post = {
+            id: e.target.getAttribute('data-id'),
+        }
+        console.log(post.id)
+        axios.delete(`http://localhost:3001/api/posts/${post.id}`)
+        .then(res => {
+            console.log(res)
+
+            // this.setState({
+            //     posts: res.data.posts
+            // });
+        })
+    }
     componentDidMount() {
         this.getAllPost();
     }
@@ -42,7 +72,11 @@ class News extends Component {
                     <h1>News</h1>
                     <h2>Our news</h2>
                     {posts.map(post => (
-                        <NewsItem post={post} key={post.id}/>
+                        <div key={post.id}>
+                            <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} key={post.id}/>
+                            <button className="btn_form btn_update" data-id={post.id} onClick={this.updatePost}>update post</button>
+                            <button className="btn_form btn_delete" data-id={post.id} onClick={this.deletePost}>delete post</button>            
+                        </div>
                     ))}
                     <div className="login">
                         <form id="login_form" method="post">

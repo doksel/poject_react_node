@@ -37,17 +37,31 @@ router.post("/posts", (req, res) => {
         text
     }).then(post => console.log('created', post.id))
 });
-router.get("/posts/:id", function(req, res){
-    models.post.findOne({}).then(post => {
+router.get("/posts/:id", (req, res) => {
+    // const BSON = require('mongodb').BSONPure;
+    // const obj_id = BSON.ObjectID.createFromHexString(req.params.id);
+    models.post.findOne({id: req.params.id}).then(post => {
+        res.json({post});
+        // res.send(`Пост = ${req.body}`);
+    });
+});
+router.delete("/posts/:id", (req, res) => {
+    const id = req.params.id;
+    models.post.findOne({id: id}).then(post => {
         res.json({post});
     });
-    res.send(`Пользователь = ${req.params.id}`);
+
 });
-router.delete("/posts/:id", function(req, res){
-    res.send(`Удаление пользователя`);
-});
-router.put("/posts", function(req, res){
-    res.send("Изменение пользователя");
+router.put("/posts", (req, res) => {
+    const id = req.params.id;
+    models.post.findOne({id: id}).then(post => {
+        res.json({post});
+    });
+    // models.post.create({
+    //     id,
+    //     title,
+    //     text
+    // }).then(post => console.log('updated', post.id))
 });
 
 

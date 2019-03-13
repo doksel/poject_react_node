@@ -1,3 +1,11 @@
 .news_item{
     text-align: left;
 }
+.input{
+    width: 400px;
+    height: 40px;
+    margin: 20px;
+}
+.news_item .btn_form{
+    margin: 10px;
+}
