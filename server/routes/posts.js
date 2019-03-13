@@ -9,7 +9,12 @@ router.get('/', (req, res) => {
     });
 });
 router.post("/posts", (req, res) => {
-    res.send("Добавление поста");
+    const{title, text} = req.body;
+    
+    models.post.create({
+        title,
+        text
+    }).then(post => console.log('created', post.id))
 });
 router.get("/posts/:id", function(req, res){
     res.send(`Пост = ${req.params.id}`);

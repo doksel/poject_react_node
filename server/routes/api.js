@@ -30,9 +30,17 @@ router.get('/posts', (req, res) => {
     });
 });
 router.post("/posts", (req, res) => {
-    res.send("Добавление пользователя");
+    const{title, text} = req.body;
+    
+    models.post.create({
+        title,
+        text
+    }).then(post => console.log('created', post.id))
 });
 router.get("/posts/:id", function(req, res){
+    models.post.findOne({}).then(post => {
+        res.json({post});
+    });
     res.send(`Пользователь = ${req.params.id}`);
 });
 router.delete("/posts/:id", function(req, res){

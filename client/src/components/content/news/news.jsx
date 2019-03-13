@@ -9,13 +9,30 @@ class News extends Component {
         super(props);
         this.state = {posts:[]};
     }
-    componentDidMount() {
+
+    getAllPost = () => {
         axios.get("http://localhost:3001/api/posts")
         .then(res => {
             this.setState({
                 posts: res.data.posts
             });
         })
+    }
+    createPost = (e) => {
+        e.preventDefault();
+        let post = {
+            title: document.querySelector('.titleVal').value,
+            text: document.querySelector('.textVal').value
+        }
+        axios.post("http://localhost:3001/api/posts",post)
+        .then(res => {
+            this.setState({
+                posts: res.data.posts
+            });
+        })
+    }
+    componentDidMount() {
+        this.getAllPost();
     }
     render() {
         const { posts } = this.state;
@@ -28,10 +45,11 @@ class News extends Component {
                         <NewsItem post={post} key={post.id}/>
                     ))}
                     <div className="login">
-                        <form id="login_form">
+                        <form id="login_form" method="post">
                             <div className="form_inner">
-                                <textarea name="task" id="addTask" cols="30" rows="10"/>
-                                <button className="btn_form js-addTask">add task</button>
+                                <input type="text" name="title" className="input titleVal"/>
+                                <textarea name="text" id="addTask" cols="30" rows="10" className="textVal"/>
+                                <button className="btn_form js-addTask" onClick={this.createPost}>add post</button>
                             </div>
                         </form>
                     </div>
