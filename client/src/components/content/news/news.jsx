@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import NewPost from './newPost';
+import NewsItem from './newsItem/newsItem';
 
 import Login from './../login/login';
 
 class News extends Component {
     constructor(props) {
         super(props);
-        this.state = {users:[],posts:[]};
+        this.state = {posts:[]};
     }
     componentDidMount() {
         axios.get("http://localhost:3001/api/posts")
@@ -15,22 +15,17 @@ class News extends Component {
             this.setState({
                 posts: res.data.posts
             });
-        });
+        })
     }
     render() {
         const { posts } = this.state;
         return(
-            <div className="cotainer">
+            <div className="container">
                 <div className="news">
                     <h1>News</h1>
                     <h2>Our news</h2>
-                    {posts.map(user => (
-                        <div>
-                            <h3>{post.title}</h3>
-                            <div key={post.id}>
-                                {post.text}
-                            </div>
-                        </div>
+                    {posts.map(post => (
+                        <NewsItem post={post} key={post.id}/>
                     ))}
                     <div className="login">
                         <form id="login_form">

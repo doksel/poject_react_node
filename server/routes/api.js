@@ -25,7 +25,7 @@ router.put("/users", function(req, res){
 
 // POSTS
 router.get('/posts', (req, res) => {
-    models.posts.find({}).then(posts => {
+    models.post.find({}).then(posts => {
         res.json({posts});
     });
 });

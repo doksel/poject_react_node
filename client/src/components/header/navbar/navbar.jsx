@@ -13,7 +13,7 @@ let Navbar = () => {
     return(
         <nav className="navbar">
             {navLinks.map(link => (
-                <NavLink to={link.link} className="link">
+                <NavLink to={link.link} className="link" key={link.name}>
                     <span className="link_inner">
                         <span className="link_tr_l">
                             <span>{link.name}</span>

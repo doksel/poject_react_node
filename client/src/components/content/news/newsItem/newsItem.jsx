@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import  './newsItem.css';
 
 let NewsItem = (props) => {
     return(
-    <div className="news_item">
-        news item
+    <div key={props.post.id} className="news_item">
+        <h3>{props.post.title}</h3>
+        <div>{props.post.text}</div>
     </div>
     )
 }

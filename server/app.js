@@ -58,7 +58,7 @@ app.use('/admin', routes.admin);
 app.use('/api', routes.api);
 
 app.get('/users', (req, res) => {
-    models.post.find({}).then(users => {
+    models.userData.find({}).then(users => {
         res.render('users',{users:users})
     })
 });
@@ -76,10 +76,14 @@ app.post('/create', (req, res) => {
     res.redirect('/');
 });
 
-app.get('/posts', (req, res) => res.render('createPost'));
+app.get('/posts', (req, res) => {
+    models.post.find({}).then(posts => {
+        res.render('createPost');
+    })
+});
 app.post('/posts', (req, res) => {
     const{title, text} = req.body;
-
+    
     models.post.create({
         title,
         text
