@@ -5,8 +5,12 @@ const router = express.Router();
 
 // USERS
 router.get('/users', (req, res) => {
-    models.userData.find({}).then(users => {
+    models.userData.find({})
+    .then(users => {
         res.json({users});
+    })
+    .catch(err => {
+        res.json({err});
     });
 });
 router.post("/users", (req, res) => {
@@ -25,44 +29,53 @@ router.put("/users", function(req, res){
 
 // POSTS
 router.get('/posts', (req, res) => {
-    models.post.find({}).then(posts => {
+    models.post.find({})
+    .then(posts => {
         res.json({posts});
+    })
+    .catch(err => {
+        res.json({err});
     });
 });
 router.post("/posts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
     const{title, text} = req.body;
-    
     models.post.create({
         title,
         text
-    }).then(post => console.log('created', post.id))
+    }).then(post => res.json({post}))
 });
 router.get("/posts/:id", (req, res) => {
-    // const BSON = require('mongodb').BSONPure;
-    // const obj_id = BSON.ObjectID.createFromHexString(req.params.id);
     const id = req.params.id;
-    models.post.findOne({_id: id}).then(post => {
+    models.post.findOne({_id: id})
+    .then(post => {
         res.json({post});
-        // res.send(`Пост = ${req.body}`);
+    })
+    .catch(err => {
+        res.json({err});
     });
 });
 router.delete("/posts/:id", (req, res) => {
     const id = req.params.id;
-    models.post.findByIdAndDelete(id).then(post => {
+    models.post.findByIdAndDelete(id)
+    .then(post => {
         res.json({post});
-        // res.send(`Пост = ${req.body}`);
+    })
+    .catch(err => {
+        res.json({err});
     });
 });
 router.put("/posts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
-    console.log(1);
-    console.log(req.body);
-    const{id, title, text} = req.body;
+    const{id, title, text, _id} = req.body;
     const newPost = {id, title, text};
-    models.post.findOneAndUpdate({_id:id}, newPost).then(post => {
-        console.log('update', post.id)
+    models.post.findOneAndUpdate({_id: id}, newPost, {new: true})
+    .then(post => {
+        res.json({post});
     })
+    .catch(err => {
+        res.json({err});
+    });
 });
 
 
