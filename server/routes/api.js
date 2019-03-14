@@ -30,6 +30,7 @@ router.get('/posts', (req, res) => {
     });
 });
 router.post("/posts", (req, res) => {
+    if(!req.body) return res.sendStatus(400);
     const{title, text} = req.body;
     
     models.post.create({
@@ -40,28 +41,28 @@ router.post("/posts", (req, res) => {
 router.get("/posts/:id", (req, res) => {
     // const BSON = require('mongodb').BSONPure;
     // const obj_id = BSON.ObjectID.createFromHexString(req.params.id);
-    models.post.findOne({id: req.params.id}).then(post => {
+    const id = req.params.id;
+    models.post.findOne({_id: id}).then(post => {
         res.json({post});
         // res.send(`Пост = ${req.body}`);
     });
 });
 router.delete("/posts/:id", (req, res) => {
     const id = req.params.id;
-    models.post.findOne({id: id}).then(post => {
+    models.post.findByIdAndDelete(id).then(post => {
         res.json({post});
+        // res.send(`Пост = ${req.body}`);
     });
-
 });
 router.put("/posts", (req, res) => {
-    const id = req.params.id;
-    models.post.findOne({id: id}).then(post => {
-        res.json({post});
-    });
-    // models.post.create({
-    //     id,
-    //     title,
-    //     text
-    // }).then(post => console.log('updated', post.id))
+    if(!req.body) return res.sendStatus(400);
+    console.log(1);
+    console.log(req.body);
+    const{id, title, text} = req.body;
+    const newPost = {id, title, text};
+    models.post.findOneAndUpdate({_id:id}, newPost).then(post => {
+        console.log('update', post.id)
+    })
 });
 
 

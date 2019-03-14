@@ -7,7 +7,7 @@ import Login from './../login/login';
 class News extends Component {
     constructor(props) {
         super(props);
-        this.state = {posts:[]};
+        this.state = {posts:[], post:{}};
     }
 
     getAllPost = () => {
@@ -16,6 +16,23 @@ class News extends Component {
             this.setState({
                 posts: res.data.posts
             });
+        })
+    }
+    getPost = (id) => {
+        console.log("in getPost")
+        console.log(4);
+        axios.get(`http://localhost:3001/api/posts/${id}`)
+        .then(res => {
+            console.log(5);
+            console.log("in getPost axios.get.then")
+            console.log(res)
+            this.setState({
+                post: res.data.post
+            });
+            console.log(6);
+            console.log(this.state.post)
+            console.log(7);
+            console.log(this.state.posts)
         })
     }
     createPost = (e) => {
@@ -29,6 +46,7 @@ class News extends Component {
             this.setState({
                 posts: res.data.posts
             });
+            this.reset();
         })
     }
     updatePost = (e) => {
@@ -36,15 +54,23 @@ class News extends Component {
         let post = {
             id: e.target.getAttribute('data-id'),
         }
-        console.log(post.id)
-        axios.put("http://localhost:3001/api/posts",post)
-        .then(res => {
-            console.log(res)
+        this.getPost(post.id);
+        setTimeout(()=>{
+            console.log(1);
+            console.log(post.id);
+            console.log(2);
+            console.log(this.state.post);
 
-            // this.setState({
-            //     posts: res.data.post
-            // });
-        })
+            axios.put("http://localhost:3001/api/posts",this.setState.post)
+            .then(res => {
+                console.log(3);
+                console.log(res)
+                this.reset();
+                // this.setState({
+                //     posts: res.data.post
+                // });
+            })
+        },700)
     }
     deletePost = (e) => {
         e.preventDefault();
@@ -61,8 +87,14 @@ class News extends Component {
             // });
         })
     }
+    reset = () => {
+        const form = document.forms["create_post_form"];
+        form.reset();
+        form.elements["id"].value = 0;
+    }
     componentDidMount() {
         this.getAllPost();
+        console.log(this.state.post)
     }
     render() {
         const { posts } = this.state;
@@ -79,7 +111,7 @@ class News extends Component {
                         </div>
                     ))}
                     <div className="login">
-                        <form id="login_form" method="post">
+                        <form id="create_post_form" name="create_post_form" method="post">
                             <div className="form_inner">
                                 <input type="text" name="title" className="input titleVal"/>
                                 <textarea name="text" id="addTask" cols="30" rows="10" className="textVal"/>
