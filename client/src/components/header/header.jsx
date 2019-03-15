@@ -3,11 +3,11 @@ import HeaderTop from './headerTop/headerTop';
 import Navbar from './navbar/navbar';
 import style from './header.module.css';
 
-let Header = () => {
+let Header = (props) => {
     return(
     <header className={style.header}>
         <HeaderTop />
-        <Navbar />
+        <Navbar navLinks={props.navLinks}/>
     </header>
     )
 }
