@@ -50,8 +50,9 @@
     display: inline-block;
 }
 .link:hover .link_tr_l{
-    transform: translate(-1px)
+    transform: translate(-1px);
+    border-bottom: 1px solid #fff;
 }
 .link:hover .link_tr_r{
-    transform: translate(1px)
+    transform: translate(1px);
 }

@@ -91,6 +91,20 @@ class News extends Component {
         const form = document.querySelector('#create_post_form');
         form.reset();
     }
+    showFormComment = (e) => {
+        e.preventDefault();
+
+    }
+    addComment = (e) => {
+        e.preventDefault();
+
+        let comment = {
+            idPost: e.target.getAttribute('data-id'),
+            title: "new comment",
+            text: "some text new comment"
+        }
+        console.log(comment);
+    }
     componentDidMount() {
         this.getAllPost();
     }
@@ -104,7 +118,7 @@ class News extends Component {
                         <h2>Our news</h2>
                         {posts.map(post => (
                             <div key={post.id}>
-                                <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} key={post.id}/>
+                                <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} addComment={this.addComment} key={post.id}/>
                             </div>
                         ))}
                         <div className="login">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
-import "./navbar.css";
+import style from './navbar.module.css';
 
 let Navbar = () => {
     const navLinks = [
@@ -11,17 +11,17 @@ let Navbar = () => {
         {name: 'login', link: '/login'},
     ];
     return(
-        <nav className="navbar">
+        <nav className={style.navbar}>
             {navLinks.map(link => (
-                <NavLink to={link.link} className="link" key={link.name}>
-                    <span className="link_inner">
-                        <span className="link_tr_l">
+                <NavLink to={link.link} className={style.link} key={link.name}>
+                    <span className={style.link_inner}>
+                        <span className={style.link_tr_l}>
                             <span>{link.name}</span>
                         </span>
-                        <span className="link_tr_r">
+                        <span className={style.link_tr_r}>
                             <span>{link.name}</span>
                         </span>
-                        <span className="link_tr_c">
+                        <span className={style.link_tr_c}>
                             <span>{link.name}</span>
                         </span>
                     </span>
