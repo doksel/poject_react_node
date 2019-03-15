@@ -14,16 +14,48 @@ router.get('/users', (req, res) => {
     });
 });
 router.post("/users", (req, res) => {
-    res.send("Добавление пользователя");
+    if(!req.body) return res.sendStatus(400);
+    const{name, sername, age} = req.body;
+    models.userData.create({
+        name,
+        sername,
+        age
+    }).then(user => res.json({user}))
+    .catch(err => {
+        res.json({err});
+    });
 });
 router.get("/users/:id", function(req, res){
-    res.send(`Пользователь = ${req.params.id}`);
+    const id = req.params.id;
+    models.userData.findOne({_id: id})
+    .then(user => {
+        res.json({user});
+    })
+    .catch(err => {
+        res.json({err});
+    });
 });
 router.delete("/users/:id", function(req, res){
-    res.send(`Удаление пользователя`);
+    const id = req.params.id;
+    models.userData.findByIdAndDelete(id)
+    .then(user => {
+        res.json({user});
+    })
+    .catch(err => {
+        res.json({err});
+    });
 });
 router.put("/users", function(req, res){
-    res.send("Изменение пользователя");
+    if(!req.body) return res.sendStatus(400);
+    const{id, name, sername, _id} = req.body;
+    const newUser = {id, name, sername};
+    models.userData.findOneAndUpdate({_id: id}, newUser, {new: true})
+    .then(user => {
+        res.json({user});
+    })
+    .catch(err => {
+        res.json({err});
+    });
 });
 
 
