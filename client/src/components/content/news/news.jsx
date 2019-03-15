@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import NewsItem from './newsItem/newsItem';
+import {rerender} from './../../../rerender';
 
 import Login from './../login/login';
 
@@ -41,10 +42,8 @@ class News extends Component {
         axios.post("http://localhost:3001/api/posts",post)
         .then(res => {
             this.state.posts.push(res.data.post);
-            // this.reset();
-            // const blockNews = document.getElementsByClassName('news_inner');
-            // let div = document.createElement("div");
-            // blockNews.appendChild(this.post(res.data.post));
+            this.reset();
+            rerender();
         })
         .catch(err => {
             console.log(err);
@@ -61,10 +60,11 @@ class News extends Component {
 
             axios.put("http://localhost:3001/api/posts",sendPost)
             .then(res => {
-                this.reset();
+                // this.reset();
                 this.setState({
                     posts: res.data.post
                 });
+                rerender();
             })
             .catch(err => {
                 console.log(err);
@@ -78,30 +78,21 @@ class News extends Component {
         }
         axios.delete(`http://localhost:3001/api/posts/${post.id}`)
         .then(res => {
-            console.log(res);
+            this.getAllPost();
+            setTimeout(()=>{
+                rerender();
+            },400)
         })
         .catch(err => {
             console.log(err);
         });
     }
     reset = () => {
-        const form = document.forms["create_post_form"];
+        const form = document.querySelector('#create_post_form');
         form.reset();
-        form.elements["id"].value = 0;
-    }
-    post = (post) => {
-        return (
-            <div key={post.id}>
-                <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} key={post.id}/>
-                <button className="btn_form btn_update" data-id={post.id} onClick={this.updatePost}>update post</button>
-                <button className="btn_form btn_delete" data-id={post.id} onClick={this.deletePost}>delete post</button>            
-            </div>
-        )
     }
     componentDidMount() {
         this.getAllPost();
-        console.log(this.state.post);
-        console.log(this.state.posts);
     }
     render() {
         const { posts, post } = this.state;
@@ -114,8 +105,6 @@ class News extends Component {
                         {posts.map(post => (
                             <div key={post.id}>
                                 <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} key={post.id}/>
-                                <button className="btn_form btn_update" data-id={post.id} onClick={this.updatePost}>update post</button>
-                                <button className="btn_form btn_delete" data-id={post.id} onClick={this.deletePost}>delete post</button>            
                             </div>
                         ))}
                         <div className="login">
