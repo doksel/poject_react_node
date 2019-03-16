@@ -1,13 +1,15 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const staticAsset = require('static-asset');
-const engine = require('ejs-mate');
-const models = require('./models');
-const config = require('./config');
-const routes = require('./routes');
+import express from 'express';
+import path from 'path';
+import staticAsset from 'static-asset';
+import engine from 'ejs-mate';
+import models from './models';
+import config from './config';
+import routes from './routes';
+import cors from 'cors';
 
-const session = require('express-session');
+const app = express();
+
+import session from 'express-session';
 const MongoStore = require('connect-mongo')(session);
 
 
@@ -23,6 +25,7 @@ const MongoStore = require('connect-mongo')(session);
 //     })
 // );
 
+app.use(cors());
 // sets and uses
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views');
@@ -55,12 +58,12 @@ app.use('/admin', routes.admin);
 app.use('/api', routes.api);
 
 app.get('/users', (req, res) => {
-    models.userRegister.find({}).then(users => {
+    models.userData.find({}).then(users => {
         res.render('users',{users:users})
     })
 });
 
-app.get('/create', (req, res) => res.render('create'));
+app.get('/create', (req, res) => res.render('createUser'));
 app.post('/create', (req, res) => {
     const{name, sername, age} = req.body;
 
@@ -73,6 +76,21 @@ app.post('/create', (req, res) => {
     res.redirect('/');
 });
 
+app.get('/posts', (req, res) => {
+    models.post.find({}).then(posts => {
+        res.render('createPost');
+    })
+});
+app.post('/posts', (req, res) => {
+    const{title, text} = req.body;
+    
+    models.post.create({
+        title,
+        text
+    }).then(post => console.log('created', post.id))
+
+    res.redirect('/');
+});
 
 // error 404
 app.use((req, res, next) => {

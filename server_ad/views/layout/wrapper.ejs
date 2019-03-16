@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My project</title>
+    <link rel="stylesheet" href="<%= assetFingerprint('/stylesheets/style.css') %>">
+</head>
+<body>
+    <% include header.ejs %>
+    <section class="site">
+        <div class="site_inner">
+            <% include sidebar.ejs %>
+            <%- body -%>
+        </div>
+    </section>
+    <% include footer.ejs %>
+    <script src="<%= assetFingerprint('/javascripts/bundle.js') %>"></script>
+</body>
+</html>

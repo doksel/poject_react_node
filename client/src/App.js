@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 import {BrowserRouter} from "react-router-dom";
 import Header from "./components/header/header";
 import Content from "./components/content/content";
 
 class App extends Component {
-  state = {users:[{id:1,login:'jjj'},{id:2,login:'qqq'},{id:3,login:'qqwwww'}]}
-  componentDidMount(){
-    // fetch('/api/users')
-    // .then(res=>res.json())
-    // .then(users=>this.setState({users}));
+  constructor(props) {
+    super(props);
   }
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          {this.state.users.map(user=>
-            <div key={user.id}>{user.login}</div>)}
-          <Header />
+          <Header navLinks={this.props.state.navLinks} />
           <Content />
         </div>
       </BrowserRouter>

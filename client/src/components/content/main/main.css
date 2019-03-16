@@ -1,0 +1,49 @@
+.main_banner{
+    width: 100%;
+    position: relative;
+}
+.main_banner img{
+    width: 100%;
+    height: auto;
+}
+.main_banner .animate_text{
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    transform: rotate(-25deg);
+    font-size: 100px;
+    color: #fff;
+    font-family: 'Dancing Script', cursive;
+    animation: animate-hello 0.9s ease-out forwards;
+}
+
+@keyframes animate-hello{
+    from{
+        opacity:0;
+        text-indent:-500px
+    }
+    to{
+        opacity:1;
+        text-indent:0
+    }
+}
+
+/* gallery */
+
+.gallery{
+    margin-top: -70px;
+}
+.gallery_inner{
+    margin: 50px 0;
+}
+.wrap_foto{
+    padding: 0 10px;
+}
+.wrap_foto_inner{
+    padding: 5px;
+    background: #fff;
+    box-shadow: 0 5px 10px 1px #ababab;
+}
+.foto{
+    width: 100%;
+}

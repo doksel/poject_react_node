@@ -1,0 +1,14 @@
+<% layout('layout/wrapper') -%>
+<div class="wrapper">
+    <div><h3>My personal data:</h3></div>
+    <div><span>My name: </span><span><%= data[0].name %></span></div>
+    <div><span>My sername: </span><span><%= data[0].sername %></span></div>
+    <div><span>My age: </span><span><%= data[0].age %></span></div>
+    <a href="/create">add new</a>
+    <div><h3>All personal data:</h3></div>
+    <% users.forEach((user)=>{ %>
+        <div><span>login: </span><span><%= user.login %></span></div>
+        <div><span>email: </span><span><%= user.email %></span></div>
+        <div><span>date created: </span><span><%= user.createdAt %></span></div>
+    <% }) %>
+</div>
