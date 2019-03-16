@@ -11,7 +11,7 @@ router.post("/users", (req, res) => {
     res.send("Добавление пользователя");
 });
 router.get("/users/:id", function(req, res){
-    res.send(`Товар = ${req.params.id}`);
+    res.send(`Пользователь = ${req.params.id}`);
 });
 router.delete("/users/:id", function(req, res){
     res.send(`Удаление пользователя`);
