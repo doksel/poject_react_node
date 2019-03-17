@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import NewsItem from './newsItem/newsItem';
-import {rerender} from './../../../rerender';
 
 import Login from './../login/login';
 
@@ -39,15 +38,7 @@ class News extends Component {
             title: document.querySelector('.titleVal').value,
             text: document.querySelector('.textVal').value
         }
-        axios.post("http://localhost:3001/api/posts",post)
-        .then(res => {
-            this.state.posts.push(res.data.post);
-            this.reset();
-            rerender();
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        this.props.createPost(post);
     }
     updatePost = (e) => {
         e.preventDefault();
@@ -64,7 +55,7 @@ class News extends Component {
                 this.setState({
                     posts: res.data.post
                 });
-                rerender();
+                // rerender();
             })
             .catch(err => {
                 console.log(err);
@@ -76,16 +67,8 @@ class News extends Component {
         let post = {
             id: e.target.getAttribute('data-id'),
         }
-        axios.delete(`http://localhost:3001/api/posts/${post.id}`)
-        .then(res => {
-            this.getAllPost();
-            setTimeout(()=>{
-                rerender();
-            },400)
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        this.props.deletePost(post);
+        this.reset();
     }
     reset = () => {
         const form = document.querySelector('#create_post_form');
