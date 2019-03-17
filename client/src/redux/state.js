@@ -1,3 +1,7 @@
+let rerender = () => {
+
+}
+
 let state = {
     testArray: [1,2,3,4,5],
     navLinks: [
@@ -7,5 +11,9 @@ let state = {
         {name: 'Contacts', link: '/contacts'},
         {name: 'login', link: '/login'},
     ],
+}
+
+export const subscribe = (observer) => {
+    rerender = observer;
 }
 export default state;
