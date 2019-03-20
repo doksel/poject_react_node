@@ -10,10 +10,10 @@ import * as serviceWorker from './serviceWorker';
 let rerender = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={store._state}/>
+            <App state={store.getState()}/>
         </BrowserRouter>, document.getElementById('root'));
 }
-rerender(store);
+rerender(store.getState());
 store.subscribe(store._rerender);
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
