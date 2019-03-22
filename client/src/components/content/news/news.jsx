@@ -3,7 +3,6 @@ import axios from "axios";
 import NewsItem from './newsItem/newsItem';
 import {rerender} from './../../../rerender';
 
-import Login from './../login/login';
 
 class News extends Component {
     constructor(props) {
@@ -12,15 +11,16 @@ class News extends Component {
     }
 
     getAllPost = () => {
-        axios.get("http://localhost:3001/api/posts")
-        .then(res => {
-            this.setState({
-                posts: res.data.posts
-            });
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        // axios.get("http://localhost:3001/api/posts")
+        // .then(res => {
+        //     this.setState({
+        //         posts: res.data.posts
+        //     });
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        // });
+        this.props.getAllPost();
     }
     getPost = (id) => {
         axios.get(`http://localhost:3001/api/posts/${id}`)
@@ -105,11 +105,25 @@ class News extends Component {
         }
         console.log(comment);
     }
-    componentDidMount() {
+    componentWillMount() {
+        debugger;
         this.getAllPost();
+        console.log('componentWillMount');
+        console.log('this.props');
+        console.log(this.props);
+        console.log('this.props.data');
+        console.log(this.props.data);
+        console.log('this.props.data.posts');
+        console.log(this.props.data.posts);
+    }    
+    componentDidMount() {
+        // this.getAllPost();
+        // console.log('componentDidMount');
+        // console.log(this.props);
+        // console.log(this.props.state.posts);
     }
     render() {
-        const { posts, post } = this.state;
+        const posts = this.props.data.posts;
         return(
             <div className="container">
                 <div className="news">

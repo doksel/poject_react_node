@@ -13,7 +13,11 @@ const store = {
             {name: 'Contacts', link: '/contacts'},
             {name: 'login', link: '/login'},
         ],
-        posts: {},
+        newPost: {
+            newPostTitle: '',
+            newPostText: '',
+        },
+        posts: [],
         post:{},
     },
     getState () {
@@ -28,6 +32,10 @@ const store = {
             console.log(err);
         });
     },
+    subscribe (observer) {
+        this._rerender = observer;
+    },
+
     getPost (id) {
         axios.get(`http://localhost:3001/api/posts/${id}`)
         .then(res => {
@@ -40,8 +48,8 @@ const store = {
     createPost (e) {
         e.preventDefault();
         let post = {
-            title: document.querySelector('.titleVal').value,
-            text: document.querySelector('.textVal').value
+            title: this._state.newPost.newPostTitle,
+            text: this._state.newPost.newPostText
         }
         axios.post("http://localhost:3001/api/posts",post)
         .then(res => {
@@ -53,12 +61,22 @@ const store = {
             console.log(err);
         });
     },
-    updateText(){
-
+    updateText(newText, newTitle){
+        this._state.newPost.newPostText = newText;
+        this._state.newPost.newPostTitle = newTitle;
+        this._rerender();
     },
-    subscribe (observer) {
-        this._rerender = observer;
-    }
+    reset () {
+        const form = document.querySelector('#create_post_form');
+        form.reset();
+    },
+    dispatch(action){
+        if(action.type === 'ADD-POST'){
+
+        }else if(action.type === 'DELETE-POST'){
+
+        }
+    },
 }
 
 export default store;
