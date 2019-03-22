@@ -106,7 +106,7 @@ class News extends Component {
         console.log(comment);
     }
     componentWillMount() {
-        debugger;
+        // debugger;
         this.getAllPost();
         console.log('componentWillMount');
         console.log('this.props');
