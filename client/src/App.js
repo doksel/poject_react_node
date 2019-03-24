@@ -13,8 +13,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header navLinks={this.props.data.navLinks} />
-        <Content data={this.props.data} getAllPost={this.props.getAllPost}/>
+        <Header />
+        <Content data={this.props.data} />
       </div>
     );
   }

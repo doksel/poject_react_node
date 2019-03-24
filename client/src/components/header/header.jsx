@@ -7,7 +7,7 @@ let Header = (props) => {
     return(
     <header className={style.header}>
         <HeaderTop />
-        <Navbar navLinks={props.navLinks}/>
+        <Navbar />
     </header>
     )
 }

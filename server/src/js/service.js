@@ -36,7 +36,7 @@ module.exports = {
     },
 
     // POSTS
-    getAllUsers(){
+    getAllPosts(){
         const promise = axios.get('/api/posts');
         return promise.then((response) => {
             return response.data;

@@ -4,7 +4,7 @@ const DELETE_USER = 'DELETE_USER';
 
 let initialState = {};
 
-const usersReducer = (state = initialState, action = initialState) => {
+export const usersReducer = (state = initialState, action = initialState) => {
     switch(action.type){
         case ADD_USER:
         return state;
