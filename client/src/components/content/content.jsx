@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Main from "./main/main";
 import About from "./about/about";
 import News from "./news/news";
@@ -12,8 +12,8 @@ let Content = (props) => {
     <div className="content">
         <Route exact path="/" component={Main} />
         <Route path="/about" component={About} />
-        {/* <Route path="/news" component={News} /> */}
-        <Route path="/news" render ={()=><News data={props.data} getAllPost={props.getAllPost}/>} />
+        <Route path="/news" component={News} />
+        {/* <Route path="/news" render ={()=><News />} /> */}
         <Route path="/contacts" component={Contacts} />
         <Route path="/login" component={Login} />
     </div>

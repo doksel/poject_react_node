@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getAllPost = () => {
+export const getAllPosts = () => {
     return axios.get("http://localhost:3001/api/posts")
 }
 export const getPost = (id) => {

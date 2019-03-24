@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import axios from "axios";
 import NewsItem from './newsItem/newsItem';
 
 import { connect } from 'react-redux';
@@ -7,108 +6,10 @@ import { postsFetchData }  from './../../../actions/postsAction';
 
 
 class News extends Component {
-
-
-    // getAllPost = () => {
-    //     // axios.get("http://localhost:3001/api/posts")
-    //     // .then(res => {
-    //     //     this.setState({
-    //     //         posts: res.data.posts
-    //     //     });
-    //     // })
-    //     // .catch(err => {
-    //     //     console.log(err);
-    //     // });
-    //     this.props.getAllPost();
-    // }
-    // getPost = (id) => {
-    //     axios.get(`http://localhost:3001/api/posts/${id}`)
-    //     .then(res => {
-    //         this.setState({
-    //             post: res.data.post
-    //         });
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
-    // }
-    // createPost = (e) => {
-    //     e.preventDefault();
-    //     let post = {
-    //         title: document.querySelector('.titleVal').value,
-    //         text: document.querySelector('.textVal').value
-    //     }
-    //     axios.post("http://localhost:3001/api/posts",post)
-    //     .then(res => {
-    //         this.state.posts.push(res.data.post);
-    //         this.reset();
-    //         rerender();
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
-    // }
-    // updatePost = (e) => {
-    //     e.preventDefault();
-    //     let post = {
-    //         id: e.target.getAttribute('data-id'),
-    //     }
-    //     this.getPost(post.id);
-    //     setTimeout(()=>{
-    //         const sendPost = this.state.post;
-
-    //         axios.put("http://localhost:3001/api/posts",sendPost)
-    //         .then(res => {
-    //             // this.reset();
-    //             this.setState({
-    //                 posts: res.data.post
-    //             });
-    //             rerender();
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         });
-    //     },700)
-    // }
-    // deletePost = (e) => {
-    //     e.preventDefault();
-    //     let post = {
-    //         id: e.target.getAttribute('data-id'),
-    //     }
-    //     axios.delete(`http://localhost:3001/api/posts/${post.id}`)
-    //     .then(res => {
-    //         this.getAllPost();
-    //         setTimeout(()=>{
-    //             rerender();
-    //         },400)
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
-    // }
-    // reset = () => {
-    //     const form = document.querySelector('#create_post_form');
-    //     form.reset();
-    // }
-    // showFormComment = (e) => {
-    //     e.preventDefault();
-
-    // }
-    // addComment = (e) => {
-    //     e.preventDefault();
-
-    //     let comment = {
-    //         idPost: e.target.getAttribute('data-id'),
-    //         title: "new comment",
-    //         text: "some text new comment"
-    //     }
-    //     console.log(comment);
-    // }
-    componentWillMount() {
-
-    }    
+   
     componentDidMount() {
         this.props.getAllPosts();
+        console.log(this.props);
     }
     render() {
         return(

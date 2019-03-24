@@ -1,15 +1,18 @@
-import {getAllPost} from './../services/postsService';
+import {getAllPosts} from './../services/postsService';
 
-export const postsFetchDataSuccess = (posts) => ({
-    type: 'GET_ALL_POSTS',
-    posts
-})
+export function postsFetchDataSuccess (posts) {
+    return {
+        type: 'GET_ALL_POSTS', posts
+    }
+}
 
-export const postsFetchData = () => {
+export function postsFetchData () {
     return (dispatch) => {
-        getAllPost()
-        // .then(res => console.log(res.data))
-        .then(res => dispatch(postsFetchDataSuccess(res.data)))
+        getAllPosts()
+        .then(res => {
+            console.log(res.data.posts);
+            dispatch(postsFetchDataSuccess(res.data.posts))
+        })
         .catch(err => {
             console.log(err);
         });
