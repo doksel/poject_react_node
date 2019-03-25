@@ -5,7 +5,7 @@ const UPDATE_POST = 'UPDATE_POST';
 const DELETE_POST = 'DELETE_POST';
 
 
-export function newsReducer (state = {}, action = {}) {
+export function newsReducer (state = {posts:[]}, action = {}) {
     switch(action.type){
         case GET_ALL_POSTS:
             return {...state, posts: action.posts};

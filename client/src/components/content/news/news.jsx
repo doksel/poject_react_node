@@ -9,20 +9,25 @@ class News extends Component {
    
     componentWillMount() {
         this.props.getAllPost();
+        console.log('componentWillMount')
         console.log(this.props)
     }
     render() {
+        console.log('render')
+        console.log(this.props);
+        const allPosts = this.props.posts;
         return(
+            
             <div className="container">
                 <div className="news">
                     <div className="news_inner">
                         <h1>News</h1>
                         <h2>Our news</h2>
-                        {/* {this.props.posts.map(post => (
+                        {allPosts.map(post => (
                             <div key={post.id}>
                                 <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} addComment={this.addComment} key={post.id}/>
                             </div>
-                        ))} */}
+                        ))}
                         <div className="login">
                             <form id="create_post_form" name="create_post_form" method="post">
                                 <div className="form_inner">
