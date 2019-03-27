@@ -2,22 +2,39 @@ import React, { Component } from 'react';
 import NewsItem from './newsItem/newsItem';
 
 import { connect } from 'react-redux';
-import { postsFetchData }  from './../../../actions/postsAction';
+import { postsFetchData, getPost, createPost, updatePost, deletePost }  from './../../../actions/postsAction';
 
 
 class News extends Component {
+
+    createPost = (e) => {
+        e.preventDefault();
+        let newPost = {
+            title: document.querySelector('.titleVal').value,
+            text: document.querySelector('.textVal').value
+        }
+        console.log(newPost);
+        console.log(this.props);
+        this.props.createPost(newPost)
+        .then(res => {
+            this.reset();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+    reset = () => {
+        const form = document.querySelector('#create_post_form');
+        form.reset();
+    }
    
     componentWillMount() {
         this.props.getAllPost();
-        console.log('componentWillMount')
-        console.log(this.props)
     }
     render() {
-        console.log('render')
-        console.log(this.props);
         const allPosts = this.props.posts;
+        // if(allPosts == undefined) {return "Loading";}
         return(
-            
             <div className="container">
                 <div className="news">
                     <div className="news_inner">
@@ -52,7 +69,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllPost: () => dispatch(postsFetchData())
+        getAllPost: () => dispatch(postsFetchData()),
+        getPost: () => dispatch(getPost()),
+        createPost: () => dispatch(createPost()),
+        updatePost: () => dispatch(updatePost()),
+        deletePost: () => dispatch(deletePost()),
     };
 };
 
