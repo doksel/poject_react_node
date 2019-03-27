@@ -11,7 +11,7 @@ export function newsReducer (state = {posts:[], post: {}}, action = {}) {
             return {...state, posts: action.posts};
         case GET_POST:
             return {...state, post: action.post};
-        case ADD_POST:          
+        case ADD_POST:
             return {...state, posts: action.posts};
         case UPDATE_POST:
             return state;

@@ -54,11 +54,8 @@ export const createPost = (post) => {
     return (dispatch) => {
         createPostDb(post)
         .then(res => {
-            console.log(res.data);
-            dispatch(createPostSuccess(res.data.post))
             getAllPostsDb()
             .then(res => {
-                console.log(res.data.posts);
                 dispatch(postsFetchDataSuccess(res.data.posts))
             })
             .catch(err => {
