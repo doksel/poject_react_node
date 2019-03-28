@@ -21,8 +21,12 @@ let NewsItem = (props) => {
             <button className="btn_form btn_comment" data-id={props.post.id} onClick={props.addComment}>add comment</button>
         </div>
         <div className="update_form">
+            <span className="close_form" onClick={props.closeForm}>X</span>
             <form id="updatePost">
+                <h2>update post</h2>
+                <label htmlFor="">title post</label>
                 <input className="input updatePostTitle" type="text" name="title"/>
+                <label htmlFor="">text post</label>
                 <textarea className="updatePostText" cols="30" rows="10" name="text"/>
                 <button className="btn_form btn_update" data-id={props.post.id} onClick={props.updatePost}>update post</button>
             </form>

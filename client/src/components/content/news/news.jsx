@@ -35,6 +35,10 @@ class News extends Component {
         const form = document.querySelector('.update_form');
         form.style.display = 'flex'
     }
+    closeForm () {
+        const form = document.querySelector('.update_form');
+        form.style.display = 'none'
+    }
     reset = () => {
         const form = document.querySelector('#create_post_form');
         form.reset();
@@ -54,13 +58,16 @@ class News extends Component {
                         <h2>Our news</h2>
                         {allPosts.map(post => (
                             <div key={post.id}>
-                                <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} addComment={this.addComment} showForm={this.showForm} key={post.id}/>
+                                <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} addComment={this.addComment} showForm={this.showForm} closeForm={this.closeForm} key={post.id}/>
                             </div>
                         ))}
                         <div className="login">
+                            <h2>Add new post</h2>
                             <form id="create_post_form" name="create_post_form" method="post">
                                 <div className="form_inner">
+                                    <label htmlFor="">title post</label>
                                     <input type="text" name="title" className="input titleVal"/>
+                                    <label htmlFor="">text post</label>
                                     <textarea name="text" id="addTask" cols="30" rows="10" className="textVal"/>
                                     <button className="btn_form js-addTask" onClick={this.createPost}>add post</button>
                                 </div>
