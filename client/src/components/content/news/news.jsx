@@ -7,7 +7,7 @@ import { postsFetchData, getPost, createPost, updatePost, deletePost }  from './
 
 class News extends Component {
 
-    createPost1 = (e) => {
+    createPost = (e) => {
         e.preventDefault();
         let newPost = {
             title: document.querySelector('.titleVal').value,
@@ -15,6 +15,21 @@ class News extends Component {
         }
         this.props.createPost(newPost)
         this.reset();
+    }
+    updatePost = (e) => {
+        let id = e.target.getAttribute('data-id');
+        let newPost = {
+            id,
+            _id: id,
+            title: document.querySelector('.titleVal').value,
+            text: document.querySelector('.textVal').value
+        }
+        this.props.updatePost(newPost)
+    }
+    deletePost = (e) => {
+        let id = e.target.getAttribute('data-id');
+        console.log(id);
+        this.props.deletePost(id)
     }
     reset = () => {
         const form = document.querySelector('#create_post_form');
@@ -43,7 +58,7 @@ class News extends Component {
                                 <div className="form_inner">
                                     <input type="text" name="title" className="input titleVal"/>
                                     <textarea name="text" id="addTask" cols="30" rows="10" className="textVal"/>
-                                    <button className="btn_form js-addTask" onClick={this.createPost1}>add post</button>
+                                    <button className="btn_form js-addTask" onClick={this.createPost}>add post</button>
                                 </div>
                             </form>
                         </div>
@@ -66,7 +81,7 @@ const mapDispatchToProps = dispatch => {
         getPost: () => dispatch(getPost()),
         createPost: (post) => dispatch(createPost(post)),
         updatePost: () => dispatch(updatePost()),
-        deletePost: () => dispatch(deletePost()),
+        deletePost: (id) => dispatch(deletePost(id)),
     };
 };
 

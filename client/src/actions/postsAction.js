@@ -82,7 +82,13 @@ export const deletePost = (id) => {
     return (dispatch) => {
         deletePostDb(id)
         .then(res => {
-            dispatch(deletePostSuccess(id))
+            getAllPostsDb()
+            .then(res => {
+                dispatch(postsFetchDataSuccess(res.data.posts))
+            })
+            .catch(err => {
+                console.log(err);
+            });
         })
         .catch(err => {
             console.log(err);
