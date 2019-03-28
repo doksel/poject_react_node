@@ -14,7 +14,7 @@ export function newsReducer (state = {posts:[], post: {}}, action = {}) {
         case ADD_POST:
             return {...state, posts: action.posts};
         case UPDATE_POST:
-            return state;
+        return {...state, posts: action.posts};
         case DELETE_POST:
             return state;
         default:

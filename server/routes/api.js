@@ -101,8 +101,8 @@ router.delete("/posts/:id", (req, res) => {
 router.put("/posts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
     const{id, title, text, _id} = req.body;
-    const newPost = {id, title, text};
-    models.post.findOneAndUpdate({_id: id}, newPost, {new: true})
+    const newPost = {id, _id, title, text};
+    models.post.findOneAndUpdate({_id}, newPost, {new: true})
     .then(post => {
         res.json({post});
     })

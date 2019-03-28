@@ -21,8 +21,8 @@ class News extends Component {
         let newPost = {
             id,
             _id: id,
-            title: document.querySelector('.titleVal').value,
-            text: document.querySelector('.textVal').value
+            title: document.querySelector('.updatePostTitle').value,
+            text: document.querySelector('.updatePostText').value
         }
         this.props.updatePost(newPost)
     }
@@ -30,6 +30,10 @@ class News extends Component {
         let id = e.target.getAttribute('data-id');
         console.log(id);
         this.props.deletePost(id)
+    }
+    showForm () {
+        const form = document.querySelector('.update_form');
+        form.style.display = 'flex'
     }
     reset = () => {
         const form = document.querySelector('#create_post_form');
@@ -50,7 +54,7 @@ class News extends Component {
                         <h2>Our news</h2>
                         {allPosts.map(post => (
                             <div key={post.id}>
-                                <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} addComment={this.addComment} key={post.id}/>
+                                <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} addComment={this.addComment} showForm={this.showForm} key={post.id}/>
                             </div>
                         ))}
                         <div className="login">
@@ -80,7 +84,7 @@ const mapDispatchToProps = dispatch => {
         getAllPost: () => dispatch(postsFetchData()),
         getPost: () => dispatch(getPost()),
         createPost: (post) => dispatch(createPost(post)),
-        updatePost: () => dispatch(updatePost()),
+        updatePost: (newPost) => dispatch(updatePost(newPost)),
         deletePost: (id) => dispatch(deletePost(id)),
     };
 };
