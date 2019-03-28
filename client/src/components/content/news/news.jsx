@@ -7,9 +7,9 @@ import { postsFetchData }  from './../../../actions/postsAction';
 
 class News extends Component {
    
-    componentWillMount() {
-        this.props.getAllPost();
-        console.log(this.props)
+    componentDidMount() {
+        this.props.getAllPosts();
+        console.log(this.props);
     }
     render() {
         return(
@@ -47,7 +47,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllPost: () => dispatch(postsFetchData())
+        getAllPosts: () => dispatch(postsFetchData())
     };
 };
 
