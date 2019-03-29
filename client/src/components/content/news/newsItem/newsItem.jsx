@@ -21,10 +21,10 @@ let NewsItem = (props) => {
             <button className="btn_form btn_delete" data-id={props.post.id} onClick={props.deletePost}>delete post</button>
             <button className="btn_form btn_comment" data-id={props.post.id} onClick={props.showFormComment}>add comment</button>
         </div>
-        <div className="update_form">
-            <span className="close_form" onClick={props.closeForm}>X</span>
-            <form id="updatePost">
-                <h2>update post</h2>
+        <div className="update_form" data-id={props.post.id}>
+            <span className="close_form" data-id={props.post.id} onClick={props.closeForm}>X</span>
+            <form id="updatePost" data-id={props.post.id}>
+                <h2>update "{props.post.title}"</h2>
                 <label htmlFor="updatePostTitle">title post</label>
                 <input className="input updatePostTitle" id="updatePostTitle" type="text" name="title"/>
                 <label htmlFor="updatePostText">text post</label>
@@ -32,12 +32,12 @@ let NewsItem = (props) => {
                 <button className="btn_form btn_update" data-id={props.post.id} onClick={props.updatePost}>update post</button>
             </form>
         </div>
-        <div className="comment_form">
-            <span className="close_form" onClick={props.closeFormComment}>X</span>
-            <form id="addComment">
-                <h2>Add our comment</h2>
+        <div className="comment_form" data-id={props.post.id}>
+            <span className="close_form" data-id={props.post.id} onClick={props.closeFormComment}>X</span>
+            <form className="addComment" data-id={props.post.id}>
+                <h2>Add our comment to "{props.post.title}"</h2>
                 <textarea className="commentPost" id="commentPost" cols="50" rows="5" name="text"/>
-                <button className="btn_form btn_update" data-id={props.post.id}>add comment</button>
+                <button className="btn_form btn_update" data-id={props.post.id} onClick={props.createComment}>add comment</button>
             </form>
         </div>
     </div>

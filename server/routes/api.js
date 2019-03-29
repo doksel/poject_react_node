@@ -113,9 +113,9 @@ router.put("/posts", (req, res) => {
 
 // POSTS COMMENTS 
 router.get('/commentsPosts', (req, res) => {
-    models.post.find({})
-    .then(posts => {
-        res.json({posts});
+    models.commentPost.find({})
+    .then(comments => {
+        res.json({comments});
     })
     .catch(err => {
         res.json({err});
@@ -123,17 +123,17 @@ router.get('/commentsPosts', (req, res) => {
 });
 router.post("/commentsPosts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
-    const{title, text} = req.body;
-    models.post.create({
-        title,
+    const{text} = req.body;
+    console.log(text);
+    models.commentPost.create({
         text
-    }).then(post => res.json({post}))
+    }).then(comment => res.json({comment}))
 });
 router.get("/commentsPosts/:id", (req, res) => {
     const id = req.params.id;
-    models.post.findOne({_id: id})
-    .then(post => {
-        res.json({post});
+    models.commentPost.findOne({_id: id})
+    .then(comment => {
+        res.json({comment});
     })
     .catch(err => {
         res.json({err});
@@ -141,9 +141,9 @@ router.get("/commentsPosts/:id", (req, res) => {
 });
 router.delete("/commentsPosts/:id", (req, res) => {
     const id = req.params.id;
-    models.post.findByIdAndDelete(id)
-    .then(post => {
-        res.json({post});
+    models.commentPost.findByIdAndDelete(id)
+    .then(comment => {
+        res.json({comment});
     })
     .catch(err => {
         res.json({err});
@@ -151,11 +151,11 @@ router.delete("/commentsPosts/:id", (req, res) => {
 });
 router.put("/commentsPosts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
-    const{id, title, text, _id} = req.body;
-    const newPost = {id, title, text};
-    models.post.findOneAndUpdate({_id: id}, newPost, {new: true})
-    .then(post => {
-        res.json({post});
+    const{id, text, _id} = req.body;
+    const newComment = {id, text, _id};
+    models.commentPost.findOneAndUpdate({_id: id}, newComment, {new: true})
+    .then(comment => {
+        res.json({comment});
     })
     .catch(err => {
         res.json({err});

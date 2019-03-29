@@ -11,21 +11,6 @@ export const getPostSuccess = (post) => {
         type: 'GET_POST', post
     }
 }
-export const createPostSuccess = (posts) => {
-    return {
-        type: 'ADD_POST', posts
-    }
-}
-export const updatePostSuccess = (post) => {
-    return {
-        type: 'UPDATE_POST', post
-    }
-}
-export const deletePostSuccess = (id) => {
-    return {
-        type: 'DELETE_POST', id
-    }
-}
 
 // ======== ACTIONS
 export const postsFetchData = () => {

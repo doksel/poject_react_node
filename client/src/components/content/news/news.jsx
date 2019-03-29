@@ -3,6 +3,7 @@ import NewsItem from './newsItem/newsItem';
 
 import { connect } from 'react-redux';
 import { postsFetchData, getPost, createPost, updatePost, deletePost }  from './../../../actions/postsAction';
+import { commentsFetchData, getComment, createComment, deleteComment}  from './../../../actions/commentsAction';
 
 
 class News extends Component {
@@ -31,28 +32,67 @@ class News extends Component {
         console.log(id);
         this.props.deletePost(id)
     }
-    showForm () {
-        const form = document.querySelector('.update_form');
-        form.style.display = 'flex'
+    showForm (e) {
+        let dataId = e.target.getAttribute('data-id');
+        const forms = document.querySelectorAll('.update_form');
+        forms.forEach((item)=>{
+            if(item.getAttribute('data-id')==dataId){
+                item.style.display = 'flex'
+            }
+        })
     }
-    closeForm () {
-        const form = document.querySelector('.update_form');
-        form.style.display = 'none'
+    closeForm (e) {
+        let dataId = e.target.getAttribute('data-id');
+        const forms = document.querySelectorAll('.update_form');
+        forms.forEach((item)=>{
+            if(item.getAttribute('data-id')==dataId){
+                item.style.display = 'none'
+            }
+        })
     }
-    showFormComment () {
-        const form = document.querySelector('.comment_form');
-        form.style.display = 'flex'
+    showFormComment (e) {
+        let dataId = e.target.getAttribute('data-id');
+        const forms = document.querySelectorAll('.comment_form');
+        forms.forEach((item)=>{
+            if(item.getAttribute('data-id')==dataId){
+                item.style.display = 'flex'
+            }
+        })
     }
-    closeFormComment () {
-        const form = document.querySelector('.comment_form');
-        form.style.display = 'none'
+    closeFormComment (e) {
+        let dataId = e.target.getAttribute('data-id');
+        const forms = document.querySelectorAll('.comment_form');
+        forms.forEach((item)=>{
+            if(item.getAttribute('data-id')==dataId){
+                item.style.display = 'none'
+            }
+        })
+    }
+    createComment (e) {
+        e.preventDefault();
+        let newComment = {
+            text: document.querySelector('.commentPost').value
+        }
+        console.log(newComment);
+        this.props.createComment(newComment)
+        // this.reset();
+        const formBlock = document.querySelector('.comment_form');
+        formBlock.style.display = 'none'
     }
     reset = () => {
         const form = document.querySelector('#create_post_form');
-        form.reset();
+        const formComent = document.querySelector('.addComment');
+        if(form){
+            form.reset();
+        }
+        if(formComent){
+            formComent.reset();
+        }
     }
+   
     componentWillMount() {
         this.props.getAllPost();
+        this.props.getAllComments();
     }
     render() {
         const allPosts = this.props.posts;
@@ -67,9 +107,10 @@ class News extends Component {
                             <div key={post.id}>
                                 <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} 
                                 addComment={this.addComment} showForm={this.showForm} closeForm={this.closeForm} 
-                                showFormComment={this.showFormComment} closeFormComment={this.closeFormComment} key={post.id}/>
+                                showFormComment={this.showFormComment} closeFormComment={this.closeFormComment}
+                                createComment={this.createComment} key={post.id}/>
                             </div>
-                        ))}
+                    ))}
                         <div className="login">
                             <h2>Add new post</h2>
                             <form id="create_post_form" name="create_post_form" method="post">
@@ -91,14 +132,21 @@ class News extends Component {
 
 const mapStateToProps = state => {
     return {
-        posts: state.newsReducer.posts
+        posts: state.newsReducer.posts,
+        comments: state.commentsReducer.comments
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getAllPost: () => dispatch(postsFetchData()),
+        getPost: () => dispatch(getPost()),
+        createPost: (post) => dispatch(createPost(post)),
         updatePost: (newPost) => dispatch(updatePost(newPost)),
         deletePost: (id) => dispatch(deletePost(id)),
+        getAllComments: () => dispatch(commentsFetchData()),
+        createComment: (comment) => dispatch(createComment(comment))
     };
 };
 
+export default connect(mapStateToProps, mapDispatchToProps)(News);

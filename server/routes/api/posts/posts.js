@@ -1,10 +1,10 @@
 import express from "express";
-import models from '../models';
+import models from './../../../models';
 const router = express.Router();
 
 
-router.get('/commentsPosts', (req, res) => {
-    models.commentPost.find({})
+router.get('/posts', (req, res) => {
+    models.post.find({})
     .then(posts => {
         res.json({posts});
     })
@@ -12,17 +12,18 @@ router.get('/commentsPosts', (req, res) => {
         res.json({err});
     });
 });
-router.post("/commentsPosts", (req, res) => {
+router.post("/posts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
+    if(req.body.title == '' || req.body.text == '') return res.sendStatus(400);
     const{title, text} = req.body;
-    models.commentPost.create({
+    models.post.create({
         title,
         text
     }).then(post => res.json({post}))
 });
-router.get("/commentsPosts/:id", (req, res) => {
+router.get("/posts/:id", (req, res) => {
     const id = req.params.id;
-    models.commentPost.findOne({_id: id})
+    models.post.findOne({_id: id})
     .then(post => {
         res.json({post});
     })
@@ -30,9 +31,9 @@ router.get("/commentsPosts/:id", (req, res) => {
         res.json({err});
     });
 });
-router.delete("/commentsPosts/:id", (req, res) => {
+router.delete("/posts/:id", (req, res) => {
     const id = req.params.id;
-    models.commentPost.findByIdAndDelete(id)
+    models.post.findByIdAndDelete(id)
     .then(post => {
         res.json({post});
     })
@@ -40,11 +41,11 @@ router.delete("/commentsPosts/:id", (req, res) => {
         res.json({err});
     });
 });
-router.put("/commentsPosts", (req, res) => {
+router.put("/posts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
-    const{id, text, _id} = req.body;
-    const newComment = {id, text, _id};
-    models.commentPost.findOneAndUpdate({_id: id}, newComment, {new: true})
+    const{id, title, text, _id} = req.body;
+    const newPost = {id, _id, title, text};
+    models.post.findOneAndUpdate({_id}, newPost, {new: true})
     .then(post => {
         res.json({post});
     })
