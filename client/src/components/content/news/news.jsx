@@ -97,12 +97,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllPost: () => dispatch(postsFetchData()),
-        getPost: () => dispatch(getPost()),
-        createPost: (post) => dispatch(createPost(post)),
         updatePost: (newPost) => dispatch(updatePost(newPost)),
         deletePost: (id) => dispatch(deletePost(id)),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(News);
