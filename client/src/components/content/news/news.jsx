@@ -39,11 +39,18 @@ class News extends Component {
         const form = document.querySelector('.update_form');
         form.style.display = 'none'
     }
+    showFormComment () {
+        const form = document.querySelector('.comment_form');
+        form.style.display = 'flex'
+    }
+    closeFormComment () {
+        const form = document.querySelector('.comment_form');
+        form.style.display = 'none'
+    }
     reset = () => {
         const form = document.querySelector('#create_post_form');
         form.reset();
     }
-   
     componentWillMount() {
         this.props.getAllPost();
     }
@@ -58,7 +65,9 @@ class News extends Component {
                         <h2>Our news</h2>
                         {allPosts.map(post => (
                             <div key={post.id}>
-                                <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} addComment={this.addComment} showForm={this.showForm} closeForm={this.closeForm} key={post.id}/>
+                                <NewsItem post={post} updatePost={this.updatePost} deletePost={this.deletePost} 
+                                addComment={this.addComment} showForm={this.showForm} closeForm={this.closeForm} 
+                                showFormComment={this.showFormComment} closeFormComment={this.closeFormComment} key={post.id}/>
                             </div>
                         ))}
                         <div className="login">

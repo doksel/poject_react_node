@@ -2,9 +2,6 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const schemaCommentPost = new Schema({
-        title: {
-            type: String
-        },
         text: {
             type: String
         },

@@ -10,7 +10,7 @@
 .news_item .btn_form{
     margin: 10px;
 }
-.update_form{
+.update_form, .comment_form{
     display: none;
     position: absolute;
     top: 0;
@@ -19,13 +19,13 @@
     background: grey;
     z-index: 2;
 }
-.update_form form{
+.update_form form, .comment_form form{
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
 }
-.update_form .close_form{
+.update_form .close_form, .comment_form .close_form{
     display: block;
     position: absolute;
     top: 10px;

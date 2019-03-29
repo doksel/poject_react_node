@@ -5,6 +5,7 @@ import engine from 'ejs-mate';
 import models from './models';
 import config from './config';
 import routes from './routes';
+// import myAPI from './routes/myAPI';
 import cors from 'cors';
 
 const app = express();
@@ -56,6 +57,7 @@ app.get('/', (req, res) => {
 
 app.use('/admin', routes.admin);
 app.use('/api', routes.api);
+// app.use('/api', myAPI.posts.api);
 
 app.get('/users', (req, res) => {
     models.userData.find({}).then(users => {
