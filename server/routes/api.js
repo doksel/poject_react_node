@@ -72,7 +72,8 @@ router.get('/posts', (req, res) => {
 router.post("/posts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
     if(req.body.title == '' || req.body.text == '') return res.sendStatus(400);
-    const{title, text} = req.body;
+    const title = req.body.title.trim().replace(/ +(?= )/g, '');
+    const text = req.body.text;
     models.post.create({
         title,
         text
@@ -100,7 +101,7 @@ router.delete("/posts/:id", (req, res) => {
 });
 router.put("/posts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
-    const{id, title, text, _id} = req.body;
+    const{id, _id, title, text} = req.body;
     const newPost = {id, _id, title, text};
     models.post.findOneAndUpdate({_id}, newPost, {new: true})
     .then(post => {

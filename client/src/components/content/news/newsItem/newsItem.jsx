@@ -23,12 +23,12 @@ let NewsItem = (props) => {
         </div>
         <div className="update_form" data-id={props.post.id}>
             <span className="close_form" data-id={props.post.id} onClick={props.closeForm}>X</span>
-            <form id="updatePost" data-id={props.post.id}>
+            <form className="updatePost" data-id={props.post.id}>
                 <h2>update "{props.post.title}"</h2>
                 <label htmlFor="updatePostTitle">title post</label>
-                <input className="input updatePostTitle" id="updatePostTitle" type="text" name="title"/>
+                <input className="input updatePostTitle" id="updatePostTitle" data-id={props.post.id} type="text" name="title"/>
                 <label htmlFor="updatePostText">text post</label>
-                <textarea className="updatePostText" id="updatePostText" cols="30" rows="10" name="text"/>
+                <textarea className="updatePostText" id="updatePostText" data-id={props.post.id} cols="30" rows="10" name="text"/>
                 <button className="btn_form btn_update" data-id={props.post.id} onClick={props.updatePost}>update post</button>
             </form>
         </div>

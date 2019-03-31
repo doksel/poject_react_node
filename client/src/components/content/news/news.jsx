@@ -11,32 +11,43 @@ class News extends Component {
     createPost = (e) => {
         e.preventDefault();
         let newPost = {
-            title: document.querySelector('.titleVal').value,
+            title: document.querySelector('.titleVal').value.trim().replace(/ +(?= )/g, ''),
             text: document.querySelector('.textVal').value
         }
         this.props.createPost(newPost)
         this.reset();
     }
     updatePost = (e) => {
+        e.preventDefault();
         let id = e.target.getAttribute('data-id');
-        let newPost = {
-            id,
-            _id: id,
-            title: document.querySelector('.updatePostTitle').value,
-            text: document.querySelector('.updatePostText').value
-        }
-        this.props.updatePost(newPost)
+        let forms = document.querySelectorAll('.updatePost');
+        let newPost;
+        forms.forEach((form)=>{  
+            if(id === form.getAttribute('data-id')){
+                let elemTitle = form.querySelector('.updatePostTitle');
+                let elemText = form.querySelector('.updatePostText');
+                if(elemTitle && elemText){
+                    newPost = {
+                        id,
+                        _id: id,
+                        title: elemTitle.value.trim().replace(/ +(?= )/g, ''),
+                        text: elemText.value
+                    }
+                }
+            }
+        })
+        this.props.updatePost(newPost);
+        this.reset();
     }
     deletePost = (e) => {
         let id = e.target.getAttribute('data-id');
-        console.log(id);
         this.props.deletePost(id)
     }
     showForm (e) {
         let dataId = e.target.getAttribute('data-id');
         const forms = document.querySelectorAll('.update_form');
         forms.forEach((item)=>{
-            if(item.getAttribute('data-id')==dataId){
+            if(item.getAttribute('data-id')===dataId){
                 item.style.display = 'flex'
             }
         })
@@ -45,7 +56,7 @@ class News extends Component {
         let dataId = e.target.getAttribute('data-id');
         const forms = document.querySelectorAll('.update_form');
         forms.forEach((item)=>{
-            if(item.getAttribute('data-id')==dataId){
+            if(item.getAttribute('data-id')===dataId){
                 item.style.display = 'none'
             }
         })
@@ -54,7 +65,7 @@ class News extends Component {
         let dataId = e.target.getAttribute('data-id');
         const forms = document.querySelectorAll('.comment_form');
         forms.forEach((item)=>{
-            if(item.getAttribute('data-id')==dataId){
+            if(item.getAttribute('data-id')===dataId){
                 item.style.display = 'flex'
             }
         })
@@ -63,30 +74,52 @@ class News extends Component {
         let dataId = e.target.getAttribute('data-id');
         const forms = document.querySelectorAll('.comment_form');
         forms.forEach((item)=>{
-            if(item.getAttribute('data-id')==dataId){
+            if(item.getAttribute('data-id')===dataId){
                 item.style.display = 'none'
             }
         })
     }
-    createComment (e) {
+    createComment = (e) => {
         e.preventDefault();
-        let newComment = {
-            text: document.querySelector('.commentPost').value
-        }
-        console.log(newComment);
+        let id = e.target.getAttribute('data-id');
+        const forms = document.querySelectorAll('.addComment');
+        let newComment;
+        forms.forEach((form)=>{
+            if(id===form.getAttribute('data-id')){
+                let elemText = form.querySelector('.commentPost');
+                if(elemText){
+                    newComment = {
+                        text: elemText.value
+                    }
+                }
+            }
+        })
         this.props.createComment(newComment)
-        // this.reset();
-        const formBlock = document.querySelector('.comment_form');
-        formBlock.style.display = 'none'
+        this.reset();
     }
     reset = () => {
         const form = document.querySelector('#create_post_form');
-        const formComent = document.querySelector('.addComment');
+        const formUpdatePostAll = document.querySelectorAll('.updatePost');
+        const formComentAll = document.querySelectorAll('.addComment');
+        
         if(form){
             form.reset();
         }
-        if(formComent){
-            formComent.reset();
+        if(formUpdatePostAll.length > 0){
+            formUpdatePostAll.forEach((form)=>{
+                form.reset();
+            })
+            document.querySelectorAll('.update_form').forEach((form)=>{
+                form.style.display = 'none'
+            })
+        }
+        if(formComentAll.length > 0){            
+            formComentAll.forEach((form)=>{
+                form.reset();
+            })
+            document.querySelectorAll('.comment_form').forEach((form)=>{
+                form.style.display = 'none'
+            })
         }
     }
    
@@ -145,7 +178,7 @@ const mapDispatchToProps = dispatch => {
         updatePost: (newPost) => dispatch(updatePost(newPost)),
         deletePost: (id) => dispatch(deletePost(id)),
         getAllComments: () => dispatch(commentsFetchData()),
-        createComment: (comment) => dispatch(createComment(comment))
+        createComment: (newComment) => dispatch(createComment(newComment))
     };
 };
 
