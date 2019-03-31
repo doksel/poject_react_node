@@ -76,7 +76,8 @@ router.post("/posts", (req, res) => {
     const text = req.body.text;
     models.post.create({
         title,
-        text
+        text,
+        comments
     }).then(post => res.json({post}))
 });
 router.get("/posts/:id", (req, res) => {
@@ -124,10 +125,10 @@ router.get('/commentsPosts', (req, res) => {
 });
 router.post("/commentsPosts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
-    const{text} = req.body;
-    console.log(text);
+    const{text, idPost} = req.body;
     models.commentPost.create({
-        text
+        text,
+        idPost
     }).then(comment => res.json({comment}))
 });
 router.get("/commentsPosts/:id", (req, res) => {

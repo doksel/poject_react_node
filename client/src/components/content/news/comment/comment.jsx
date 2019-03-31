@@ -1,12 +1,20 @@
 import React from 'react';
-import  './newsItem.css';
+import  './comment.css';
 
-let NewsItem = (props) => {
+let Comment = (props) => {
+    const date = new Date(props.comment.createdAt);
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'
+    }
     return(
     <div key={props.comment.id} className="comment">
-        <div className="commetn_user">{props.comment.user}</div>
-        <div className="commetn_text">{props.comment.text}</div>
+        <div className="comment_date">{date.toLocaleString('ru',options)}</div>
+        <div className="comment_text">{props.comment.text}</div>
     </div>
     )
 }
-export default NewsItem;
+export default Comment;

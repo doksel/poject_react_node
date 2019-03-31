@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import  './news.css';
 import NewsItem from './newsItem/newsItem';
+import Comment from './comment/comment';
 
 import { connect } from 'react-redux';
 import { postsFetchData, getPost, createPost, updatePost, deletePost }  from './../../../actions/postsAction';
@@ -12,7 +14,8 @@ class News extends Component {
         e.preventDefault();
         let newPost = {
             title: document.querySelector('.titleVal').value.trim().replace(/ +(?= )/g, ''),
-            text: document.querySelector('.textVal').value
+            text: document.querySelector('.textVal').value,
+            comments: false
         }
         this.props.createPost(newPost)
         this.reset();
@@ -31,7 +34,7 @@ class News extends Component {
                         id,
                         _id: id,
                         title: elemTitle.value.trim().replace(/ +(?= )/g, ''),
-                        text: elemText.value
+                        text: elemText.value,
                     }
                 }
             }
@@ -89,12 +92,13 @@ class News extends Component {
                 let elemText = form.querySelector('.commentPost');
                 if(elemText){
                     newComment = {
-                        text: elemText.value
+                        text: elemText.value,
+                        idPost: id
                     }
                 }
             }
         })
-        this.props.createComment(newComment)
+        this.props.createComment(newComment);
         this.reset();
     }
     reset = () => {
@@ -129,6 +133,7 @@ class News extends Component {
     }
     render() {
         const allPosts = this.props.posts;
+        const allComments = this.props.comments;
         // if(allPosts == undefined) {return "Loading";}
         return(
             <div className="container">
@@ -142,8 +147,20 @@ class News extends Component {
                                 addComment={this.addComment} showForm={this.showForm} closeForm={this.closeForm} 
                                 showFormComment={this.showFormComment} closeFormComment={this.closeFormComment}
                                 createComment={this.createComment} key={post.id}/>
+                                <div className="comments_list">
+                                    {/* <h3>Comments:</h3> */}
+                                    {allComments.map(comment => {
+                                        if(comment.idPost===post.id){
+                                            return (
+                                                <div key={comment.id}>
+                                                    <Comment comment={comment} />
+                                                </div>
+                                            )
+                                        }
+                                    })}
+                                </div>
                             </div>
-                    ))}
+                        ))}
                         <div className="login">
                             <h2>Add new post</h2>
                             <form id="create_post_form" name="create_post_form" method="post">
