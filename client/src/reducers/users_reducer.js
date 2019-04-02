@@ -1,22 +1,16 @@
-const ADD_USER = 'ADD_USER';
-const UPDATE_USER = 'UPDATE_USER';
-const DELETE_USER = 'DELETE_USER';
+const GET_ALL_USERS = 'GET_ALL_USERS';
+const GET_USER = 'GET_USER';
 
-let initialState = {};
+
+let initialState = {users:[], user: {}};
 
 export const usersReducer = (state = initialState, action = initialState) => {
     switch(action.type){
-        case ADD_USER:
+        case GET_ALL_USERS:
         return state;
-        case UPDATE_USER:
-        return state;
-        case DELETE_USER:
+        case GET_USER:
         return state;
         default:
             return state;
     }
 }
-export const createUserCreator = () => ({type: ADD_USER});
-
-export const updateUserCreator = () => ({type: UPDATE_USER});
-export const deleteUserCreator = () => ({type: DELETE_USER});

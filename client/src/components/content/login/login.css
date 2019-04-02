@@ -14,3 +14,29 @@ textarea{
     height: 40px;
     margin: 20px 0;
 }
+.form-control{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+.form-control .input{
+    margin: 10px 0;
+    padding: 5px 10px;
+}
+.form_register{
+    display: none;
+    width: 500px;
+    margin: 0 auto;
+}
+.form_login{
+    width: 500px;
+    margin: 0 auto;
+}
+.buttons_row{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.form_login .btn_form{
+    width: 100px;
+}
