@@ -7,6 +7,7 @@ import config from './config';
 import routes from './routes';
 import cors from 'cors';
 
+import mongoose from 'mongoose';
 const app = express();
 
 import session from 'express-session';
@@ -14,16 +15,16 @@ const MongoStore = require('connect-mongo')(session);
 
 
 // sessions
-// app.use(
-//     session({
-//         secret: config.SESSION_SECRET,
-//         resave: true,
-//         saveUinitialized: false,
-//         store: new MongoStore({
-//             mongoConnection: mongoose.connection
-//         })
-//     })
-// );
+app.use(
+    session({
+        secret: config.SESSION_SECRET,
+        resave: true,
+        saveUinitialized: false,
+        store: new MongoStore({
+            mongooseConnection: mongoose.connection
+        })
+    })
+);
 
 app.use(cors());
 // sets and uses
@@ -47,8 +48,8 @@ let data = [
 
 // routes
 app.get('/', (req, res) => {
-    // const id = req.session.userId;
-    // const login = req.session.userLogin;
+    const id = req.session.userId;
+    const login = req.session.userLogin;
     models.userRegister.find({}).then(users => {
         res.render('index',{users:users,data:data});
     });
