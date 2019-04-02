@@ -15,7 +15,6 @@ class News extends Component {
         let newPost = {
             title: document.querySelector('.titleVal').value.trim().replace(/ +(?= )/g, ''),
             text: document.querySelector('.textVal').value,
-            comments: false
         }
         this.props.createPost(newPost)
         this.reset();

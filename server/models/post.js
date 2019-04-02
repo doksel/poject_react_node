@@ -7,9 +7,6 @@ const schemaPost = new Schema({
         },
         text: {
             type: String
-        },
-        comments: {
-            type: Boolean
         }
     },    
     {

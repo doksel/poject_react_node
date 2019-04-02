@@ -76,8 +76,7 @@ router.post("/posts", (req, res) => {
     const text = req.body.text;
     models.post.create({
         title,
-        text,
-        comments
+        text
     }).then(post => res.json({post}))
 });
 router.get("/posts/:id", (req, res) => {
@@ -102,8 +101,8 @@ router.delete("/posts/:id", (req, res) => {
 });
 router.put("/posts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
-    const{id, _id, title, text} = req.body;
-    const newPost = {id, _id, title, text};
+    const{_id, title, text} = req.body;
+    const newPost = {title, text};
     models.post.findOneAndUpdate({_id}, newPost, {new: true})
     .then(post => {
         res.json({post});
@@ -153,9 +152,9 @@ router.delete("/commentsPosts/:id", (req, res) => {
 });
 router.put("/commentsPosts", (req, res) => {
     if(!req.body) return res.sendStatus(400);
-    const{id, text, _id} = req.body;
-    const newComment = {id, text, _id};
-    models.commentPost.findOneAndUpdate({_id: id}, newComment, {new: true})
+    const{text, _id} = req.body;
+    const newComment = {text};
+    models.commentPost.findOneAndUpdate({_id}, newComment, {new: true})
     .then(comment => {
         res.json({comment});
     })
