@@ -1,10 +1,73 @@
 import React, { Component } from 'react';
 import './login.css';
 import { connect } from 'react-redux';
-import { getAllUsers, getUser, createUser }  from './../../../actions/usersAction';
+import { loginUser, registerUser }  from '../../../actions/authAction';
 
 class LoginPage extends Component {
 
+    registerUser = (e) => {
+        e.preventDefault();
+        let data = {
+            login: document.querySelector('#registerUsername').value,
+            email: document.querySelector('#registerEmail').value,
+            password: document.querySelector('#registerPassword').value,
+            passwordConfirm: document.querySelector('#registerConfirmPassword').value,
+        };
+        this.props.registerUser(data)
+        .then(this.validateRegister);
+    }
+    loginUser = (e) => {
+        e.preventDefault();
+        let data = {
+            login: document.querySelector('#loginUsername').value,
+            password: document.querySelector('#loginPassword').value,
+        };
+        console.log(data);
+        this.props.loginUser(data)
+        .then(this.validateRegister);
+    }
+    validateRegister(response) {
+        console.log(response.data);
+        const data = response.data;
+        const spanError = document.querySelectorAll('.error');
+    
+        if(!data.ok){
+            if(spanError){
+                spanError.forEach(item => {
+                    item.innerHTML = '';
+                    item.innerHTML = response.data.error; 
+                });
+            };
+            if(data.fields){
+                data.fields.forEach(item => {
+                    let input = document.querySelectorAll(`input[name=${item}]`);
+                    if(input){
+                        input.forEach(item => {
+                            item.style.borderColor='red'; 
+                        });
+                    };
+                });
+            };
+        }else{        
+            if(spanError){
+                spanError.forEach(item => {
+                    item.innerHTML = '';
+                    item.innerHTML = 'Вы успешео зарегистрировалиь!!!';
+                });
+                resetInputValue();
+            };
+            setTimeout(() => {
+                location="/";
+            },3000);
+        }
+    }    
+    changeRegister(e){
+        e.preventDefault();
+        const formRegister = document.querySelector('.form-register');
+        const formLogin = document.querySelector('.form-login');
+        formRegister.style.display = 'flex';
+        formLogin.style.display = 'none';
+    }
     render() {
         return(
         <div className="login">
@@ -57,15 +120,14 @@ class LoginPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.usersReducer.users,
+        users: state.authReducer.users,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllUsers: () => dispatch(getAllUsers()),
-        getUser: () => dispatch(getUser()),
-        createUser: (user) => dispatch(createUser(user)),
+        loginUser: (user) => dispatch(loginUser(user)),
+        registerUser: (user) => dispatch(registerUser(user)),
     };
 };
 

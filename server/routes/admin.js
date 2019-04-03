@@ -132,14 +132,4 @@ router.post("/login", (req, res)=>{
     )
 });
 
-router.put('/', (req, res) => {
-    console.log('put userRegister');
-    console.log(req.body);
-});
-
-router.delete('/', (req, res) => {
-    console.log('delete userRegister');
-    console.log(res.body);
-    models.userRegister.deleteOne({login:req.body.login});
-});
 module.exports = router;
