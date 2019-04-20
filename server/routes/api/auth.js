@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcrypt-nodejs');
-const models = require('../models');
+const models = require('../../models');
 
 router.get('/', (req, res) => {
     res.render('register');
@@ -60,7 +60,6 @@ router.post("/register", (req, res)=>{
                         res.json({
                             ok: true
                         });
-                        // res.redirect('/');
                     }).catch(err => {
                         console.log(err);
                         res.json({
@@ -117,7 +116,6 @@ router.post("/login", (req, res)=>{
                         res.json({
                             ok: true
                         });
-                        res.render('index');
                     }
                 });
             }

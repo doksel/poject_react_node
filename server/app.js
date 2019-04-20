@@ -14,16 +14,16 @@ const MongoStore = require('connect-mongo')(session);
 
 
 // sessions
-// app.use(
-//     session({
-//         secret: config.SESSION_SECRET,
-//         resave: true,
-//         saveUinitialized: false,
-//         store: new MongoStore({
-//             mongoConnection: mongoose.connection
-//         })
-//     })
-// );
+app.use(
+    session({
+        secret: config.SESSION_SECRET,
+        resave: true,
+        saveUinitialized: false,
+        store: new MongoStore({
+            mongoConnection: mongoose.connection
+        })
+    })
+);
 
 app.use(cors());
 // sets and uses
@@ -47,8 +47,8 @@ let data = [
 
 // routes
 app.get('/', (req, res) => {
-    // const id = req.session.userId;
-    // const login = req.session.userLogin;
+    const id = req.session.userId;
+    const login = req.session.userLogin;
     models.userRegister.find({}).then(users => {
         res.render('index',{users:users,data:data});
     });
@@ -56,6 +56,9 @@ app.get('/', (req, res) => {
 
 app.use('/admin', routes.admin);
 app.use('/api', routes.api);
+app.use('/posts', routes.posts);
+app.use('/comments', routes.comments);
+app.use('/users', routes.users);
 
 app.get('/users', (req, res) => {
     models.userData.find({}).then(users => {
