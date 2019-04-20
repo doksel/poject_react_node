@@ -57,11 +57,15 @@ app.get('/', (req, res) => {
 
 app.use('/admin', routes.admin);
 app.use('/api', routes.api);
+app.use('/auth', routes.auth);
+app.use('/users', routes.users);
+app.use('/posts', routes.posts);
+app.use('/comments', routes.comments);
 
 
-app.get('/users', (req, res) => {
+app.get('/user', (req, res) => {
     models.userData.find({}).then(users => {
-        res.render('users',{users:users})
+        res.render('user',{users:users})
     })
 });
 

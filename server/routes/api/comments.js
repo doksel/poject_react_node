@@ -1,9 +1,9 @@
 import express from "express";
-import models from './../../../models';
+import models from '../../models';
 const router = express.Router();
 
 
-router.get('/commentsPosts', (req, res) => {
+router.get('/', (req, res) => {
     models.commentPost.find({})
     .then(posts => {
         res.json({posts});
@@ -12,7 +12,7 @@ router.get('/commentsPosts', (req, res) => {
         res.json({err});
     });
 });
-router.post("/commentsPosts", (req, res) => {
+router.post("/", (req, res) => {
     if(!req.body) return res.sendStatus(400);
     const{title, text} = req.body;
     models.commentPost.create({
@@ -20,7 +20,7 @@ router.post("/commentsPosts", (req, res) => {
         text
     }).then(post => res.json({post}))
 });
-router.get("/commentsPosts/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     const id = req.params.id;
     models.commentPost.findOne({_id: id})
     .then(post => {
@@ -30,7 +30,7 @@ router.get("/commentsPosts/:id", (req, res) => {
         res.json({err});
     });
 });
-router.delete("/commentsPosts/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
     const id = req.params.id;
     models.commentPost.findByIdAndDelete(id)
     .then(post => {

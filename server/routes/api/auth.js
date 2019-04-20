@@ -1,7 +1,11 @@
-import express from "express";
-import models from './../../../models';
+const express = require("express");
 const router = express.Router();
+const bcrypt = require('bcrypt-nodejs');
+const models = require('../../models');
 
+router.get('/', (req, res) => {
+    res.render('register');
+});
 
 // POST is register
 router.post("/register", (req, res)=>{
@@ -51,8 +55,8 @@ router.post("/register", (req, res)=>{
                         password: hash
                     }).then(user => {
                         console.log(user);
-                        req.session.userId = user.id;
-                        req.session.userLogin = user.login;
+                        // req.session.userId = user.id;
+                        // req.session.userLogin = user.login;
                         res.json({
                             ok: true
                         });
@@ -108,8 +112,8 @@ router.post("/login", (req, res)=>{
                             fields: ['login', 'password']
                         });
                     }else{
-                        req.session.userId = user.id;
-                        req.session.userLogin = user.login;
+                        // req.session.userId = user.id;
+                        // req.session.userLogin = user.login;
                         res.json({
                             ok: true
                         });
