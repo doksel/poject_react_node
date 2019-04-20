@@ -54,11 +54,7 @@ class LoginPage extends Component {
                     item.innerHTML = '';
                     item.innerHTML = 'Вы успешео зарегистрировалиь!!!';
                 });
-                resetInputValue();
             };
-            setTimeout(() => {
-                location="/";
-            },3000);
         }
     }    
     changeRegister(e){

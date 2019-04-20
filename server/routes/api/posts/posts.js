@@ -1,5 +1,5 @@
-import express from "express";
-import models from './../../../models';
+const express = require ("express");
+const models = require ('./../../../models');
 const router = express.Router();
 
 
