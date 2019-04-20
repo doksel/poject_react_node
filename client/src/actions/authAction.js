@@ -13,9 +13,9 @@ export const registerUserSuccess = (user) => {
 }
 
 // ======== ACTIONS
-export const loginUser = () => {
+export const loginUser = (user) => {
     return (dispatch) => {
-        loginUserDb()
+        loginUserDb(user)
         .then(res => {
             dispatch(loginUserSuccess(res.data.user))
         })

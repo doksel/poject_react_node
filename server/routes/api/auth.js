@@ -115,9 +115,11 @@ router.post("/login", (req, res)=>{
                         // req.session.userId = user.id;
                         // req.session.userLogin = user.login;
                         res.json({
-                            ok: true
+                            ok: true,
+                            userId: user.id,
+                            userLogin: user.login
                         });
-                        res.render('index');
+                        // res.render('index');
                     }
                 });
             }
