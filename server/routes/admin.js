@@ -55,8 +55,7 @@ router.post("/register", (req, res)=>{
                         password: hash
                     }).then(user => {
                         console.log(user);
-                        req.session.userId = user.id;
-                        req.session.userLogin = user.login;
+                        req.session.suserLogin = user.login;
                         res.json({
                             ok: true
                         });

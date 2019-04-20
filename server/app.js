@@ -7,11 +7,13 @@ import config from './config';
 import routes from './routes';
 import cors from 'cors';
 
+import mongoose from 'mongoose';
 const app = express();
 
 import session from 'express-session';
 const MongoStore = require('connect-mongo')(session);
 
+app.use(cors());
 
 // sessions
 app.use(
@@ -20,12 +22,11 @@ app.use(
         resave: true,
         saveUinitialized: false,
         store: new MongoStore({
-            mongoConnection: mongoose.connection
+            mongooseConnection: mongoose.connection
         })
     })
 );
 
-app.use(cors());
 // sets and uses
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views');
@@ -50,19 +51,21 @@ app.get('/', (req, res) => {
     const id = req.session.userId;
     const login = req.session.userLogin;
     models.userRegister.find({}).then(users => {
-        res.render('index',{users:users,data:data});
+        // res.render('index',{users, data});
+        res.json({user:{id, login}});
     });
 });
 
 app.use('/admin', routes.admin);
 app.use('/api', routes.api);
-app.use('/posts', routes.posts);
-app.use('/comments', routes.comments);
-app.use('/users', routes.users);
+app.use('/api/posts', routes.posts);
+app.use('/api/comments', routes.comments);
+app.use('/api/users', routes.users);
 
 app.get('/users', (req, res) => {
     models.userData.find({}).then(users => {
-        res.render('users',{users:users})
+        // res.render('users',{users:users})
+        res.json({users:users})
     })
 });
 
