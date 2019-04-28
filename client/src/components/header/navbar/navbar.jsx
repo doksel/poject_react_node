@@ -13,21 +13,30 @@ class Navbar extends Component {
                 {name: 'About us', link: '/about'},
                 {name: 'News', link: '/news'},
                 {name: 'Contacts', link: '/contacts'},
-                {name: 'login', link: '/login'},
-                {name: 'logout', link: '/login'},
-            ]
+            ],
+            auth: 'login'
         };
     }
     componentDidMount() {
         console.log(this.props.dataAuth);
+        // let stateUser = (this.props.dataAuth.user)?"logout":"login";
+        // this.setState({auth: stateUser});
     }
     componentDidUpdate() {
         console.log(this.props.dataAuth);
-        console.log(this.props.dataAuth.user.login);
+        // console.log(this.props.dataAuth.user.login);
+        // let stateUser = (this.props.dataAuth.user)?"logout":"login";
+        // this.setState({auth: stateUser}); 
+        if(this.props.dataAuth.user){
+            if(this.state.auth === 'login'){
+                let stateUser = (this.props.dataAuth.user)?"logout":"login";
+                this.setState({auth: stateUser});     
+            }
+        } 
     }
     render () {
-        const dataAuth = this.props.dataAuth.user;
         const navLinks = this.state.navLinks;
+        const stateUser = this.state.auth;
         return(
             <nav className={style.navbar}>
                 {navLinks.map(link => (
@@ -45,6 +54,19 @@ class Navbar extends Component {
                         </span>
                     </NavLink>
                 ))}
+                <NavLink to='/login' className={style.link}>
+                    <span className={style.link_inner}>
+                        <span className={style.link_tr_l}>
+                            <span>{stateUser}</span>
+                        </span>
+                        <span className={style.link_tr_r}>
+                            <span>{stateUser}</span>
+                        </span>
+                        <span className={style.link_tr_c}>
+                            <span>{stateUser}</span>
+                        </span>
+                    </span>
+                </NavLink>
             </nav>
         )
     }

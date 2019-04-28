@@ -36,7 +36,7 @@ class LoginPage extends Component {
     }
     componentDidUpdate() {
         console.log(this.props.dataAuth);
-        console.log(this.props.dataAuth.user.login);
+        // console.log(this.props.dataAuth.user.login);
     }
     render() {
         const dataAuth = this.props.dataAuth.user;
@@ -90,7 +90,10 @@ class LoginPage extends Component {
             )
         }else{
             return(
-                <h1>hello {dataAuth.login}</h1>
+                <div>
+                    <h1>hello {dataAuth.login}</h1>
+                    <button className="btn_form btn-logout" type="submit">Logout</button>
+                </div>
             )
         }
     }
