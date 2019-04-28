@@ -35,14 +35,12 @@ if(btnLogin){
             login: document.querySelector('#loginUsername').value,
             password: document.querySelector('#loginPassword').value,
         };
-        console.log(data);
         service.login(data)
         .then(validateRegister);
     });
 };
 
 function validateRegister(response) {
-    console.log(response.data);
     const data = response.data;
     const spanError = document.querySelectorAll('.error');
 

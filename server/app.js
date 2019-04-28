@@ -13,6 +13,8 @@ const app = express();
 import session from 'express-session';
 const MongoStore = require('connect-mongo')(session);
 
+app.use(cors());
+
 
 // sessions
 // app.use(
@@ -26,7 +28,6 @@ const MongoStore = require('connect-mongo')(session);
 //     })
 // );
 
-app.use(cors());
 // sets and uses
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views');

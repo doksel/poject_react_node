@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
 
 // POST is register
 router.post("/register", (req, res)=>{
-    console.log(req.body);
     const login = req.body.login;
     const email = req.body.email;
     const password = req.body.password;
@@ -54,11 +53,11 @@ router.post("/register", (req, res)=>{
                         email,
                         password: hash
                     }).then(user => {
-                        console.log(user);
                         // req.session.userId = user.id;
                         // req.session.userLogin = user.login;
                         res.json({
-                            ok: true
+                            ok: true,
+                            user
                         });
                         // res.redirect('/');
                     }).catch(err => {
@@ -114,12 +113,15 @@ router.post("/login", (req, res)=>{
                     }else{
                         // req.session.userId = user.id;
                         // req.session.userLogin = user.login;
+                        // res.json({
+                            //     ok: true,
+                            //     userId: user.id,
+                        //     userLogin: user.login
+                        // });
                         res.json({
                             ok: true,
-                            userId: user.id,
-                            userLogin: user.login
+                            user
                         });
-                        // res.render('index');
                     }
                 });
             }
