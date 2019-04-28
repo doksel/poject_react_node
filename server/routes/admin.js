@@ -112,8 +112,8 @@ router.post("/login", (req, res)=>{
                             fields: ['login', 'password']
                         });
                     }else{
-                        // req.session.userId = user.id;
-                        // req.session.userLogin = user.login;
+                        req.session.userId = user.id;
+                        req.session.userLogin = user.login;
                         res.json({
                             ok: true
                         });

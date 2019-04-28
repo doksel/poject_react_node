@@ -53,6 +53,7 @@ router.post("/register", (req, res)=>{
                         email,
                         password: hash
                     }).then(user => {
+<<<<<<< HEAD
                         // req.session.userId = user.id;
                         // req.session.userLogin = user.login;
                         res.json({
@@ -60,6 +61,14 @@ router.post("/register", (req, res)=>{
                             user
                         });
                         // res.redirect('/');
+=======
+                        console.log(user);
+                        req.session.userId = user.id;
+                        req.session.userLogin = user.login;
+                        res.json({
+                            ok: true
+                        });
+>>>>>>> 03d9a9b7aff58c8b01ff694c4eff2f8002e78b84
                     }).catch(err => {
                         console.log(err);
                         res.json({
@@ -111,6 +120,7 @@ router.post("/login", (req, res)=>{
                             fields: ['login', 'password']
                         });
                     }else{
+<<<<<<< HEAD
                         // req.session.userId = user.id;
                         // req.session.userLogin = user.login;
                         // res.json({
@@ -121,6 +131,12 @@ router.post("/login", (req, res)=>{
                         res.json({
                             ok: true,
                             user
+=======
+                        req.session.userId = user.id;
+                        req.session.userLogin = user.login;
+                        res.json({
+                            ok: true
+>>>>>>> 03d9a9b7aff58c8b01ff694c4eff2f8002e78b84
                         });
                     }
                 });
@@ -136,4 +152,17 @@ router.post("/login", (req, res)=>{
     )
 });
 
+<<<<<<< HEAD
+=======
+router.put('/', (req, res) => {
+    console.log('put userRegister');
+    console.log(req.body);
+});
+
+router.delete('/', (req, res) => {
+    console.log('delete userRegister');
+    console.log(res.body);
+    models.userRegister.deleteOne({login:req.body.login});
+});
+>>>>>>> 03d9a9b7aff58c8b01ff694c4eff2f8002e78b84
 module.exports = router;
