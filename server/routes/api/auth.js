@@ -53,8 +53,10 @@ router.post("/register", (req, res)=>{
                         email,
                         password: hash
                     }).then(user => {
-                        // req.session.userId = user.id;
-                        // req.session.userLogin = user.login;
+                        req.session.userId = user.id;
+                        req.session.userLogin = user.login;
+                        console.log(1);
+                        console.log(req.session);                       
                         res.json({
                             ok: true,
                             user
@@ -111,8 +113,10 @@ router.post("/login", (req, res)=>{
                             fields: ['login', 'password']
                         });
                     }else{
-                        // req.session.userId = user.id;
-                        // req.session.userLogin = user.login;
+                        req.session.userId = user.id;
+                        req.session.userLogin = user.login;
+                        console.log(111);
+                        console.log(req.session); 
                         // res.json({
                             //     ok: true,
                             //     userId: user.id,

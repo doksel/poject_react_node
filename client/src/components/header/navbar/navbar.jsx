@@ -70,6 +70,7 @@ class Navbar extends Component {
 const mapStateToProps = state => {
     return {
         dataAuth: state.authReducer.dataAuth,
+        authUser: state.authReducer.authUser
     };
 };
 

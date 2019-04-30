@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './login.css';
 
 import { connect } from 'react-redux';
-import { loginUser, registerUser }  from '../../../actions/authAction';
+import { loginUser, registerUser, authUser }  from '../../../actions/authAction';
 
 class LoginPage extends Component {
 
@@ -22,7 +22,8 @@ class LoginPage extends Component {
             login: document.querySelector('#loginUsername').value,
             password: document.querySelector('#loginPassword').value,
         };
-        this.props.loginUser(user)
+        this.props.loginUser(user);
+        this.props.authUser();
     }   
     changeRegister(e){
         e.preventDefault();
@@ -35,6 +36,7 @@ class LoginPage extends Component {
     }
     componentDidUpdate() {
     }
+    
     render() {
         const dataAuth = this.props.dataAuth.user;
         if(!dataAuth){
@@ -99,11 +101,13 @@ class LoginPage extends Component {
 const mapStateToProps = state => {
     return {
         dataAuth: state.authReducer.dataAuth,
+        authUser: state.authReducer.authUser
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        authUser: () => dispatch(authUser()),
         loginUser: (user) => dispatch(loginUser(user)),
         registerUser: (user) => dispatch(registerUser(user)),
     };

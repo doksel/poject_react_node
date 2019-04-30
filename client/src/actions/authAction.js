@@ -1,4 +1,4 @@
-import {loginUserDb, registerUserDb} from '../services/authService';
+import {loginUserDb, registerUserDb, authUserSession} from '../services/authService';
 
 // ======== ACTION_CREATORS
 export const loginUserSuccess = (data) => {
@@ -11,8 +11,25 @@ export const registerUserSuccess = (data) => {
         type: 'REGISTER_USER', data
     }
 }
-
+export const authUserSuccess = (data) => {
+    return {
+        type: 'AUTH_USER', data
+    }
+}
 // ======== ACTIONS
+export const authUser = () => {
+    return (dispatch) => {
+        authUserSession()
+        .then(res => {
+            console.log(11111111);
+            console.log(res.data);
+            dispatch(authUserSuccess(res.data))
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+}
 export const loginUser = (user) => {
     return (dispatch) => {
         loginUserDb(user)
@@ -45,13 +62,9 @@ export const loginUser = (user) => {
                         item.innerHTML = 'Вы успешео зарегистрировалиь!!!';
                     });
                 };
-                dispatch(registerUserSuccess(response.data))
+                dispatch(loginUserSuccess(response.data));
             }
         })
-        // .then(res => {
-        //     console.log(res);
-        //     dispatch(loginUserSuccess(res))
-        // })
         .catch(err => {
             console.log(err);
         });

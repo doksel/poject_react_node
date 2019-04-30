@@ -24,7 +24,7 @@ export default class Gallery extends Component {
   getListFoto(){
     const listFoto = [
       foto1,foto2,foto3,foto4,foto5
-  ];
+    ];
     return listFoto;
   }
   openLightbox (index, e) {
@@ -57,7 +57,6 @@ export default class Gallery extends Component {
 	}
 	handleClickImage () {
 		if (this.state.currentImage === this.getListFoto().length - 1) return;
-
 		this.gotoNext();
 	}
   render() {

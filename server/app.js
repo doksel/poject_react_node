@@ -17,16 +17,18 @@ app.use(cors());
 
 
 // sessions
-// app.use(
-//     session({
-//         secret: config.SESSION_SECRET,
-//         resave: true,
-//         saveUinitialized: false,
-//         store: new MongoStore({
-//             mongooseConnection: mongoose.connection
-//         })
-//     })
-// );
+app.use(
+    session({
+        secret: config.SESSION_SECRET,
+        resave: true,
+        proxy: true,
+        saveUninitialized: false,
+        cookie: { path: '/', httpOnly: false , secure: true, maxAge:24*60*60*1000 },
+        store: new MongoStore({
+            mongooseConnection: mongoose.connection
+        })
+    })
+);
 
 // sets and uses
 app.engine('ejs', engine);
@@ -49,12 +51,17 @@ let data = [
 
 // routes
 app.get('/', (req, res) => {
-    const id = req.session.userId;
-    const login = req.session.userLogin;
-    models.userRegister.find({}).then(users => {
-        // res.render('index',{users, data});
-        res.json({user:{id, login}});
-    });
+    let id = req.session.userId;
+    let login = req.session.userLogin;
+    console.log(login);
+    console.log(id);
+    console.log(11);
+    console.log(req.session);
+    // models.userRegister.find({}).then(users => {
+    //     res.render('index',{users, data});
+    //     // res.json({user:{id, login}});
+    // });
+    res.json({user:{id, login}});
 });
 
 app.use('/admin', routes.admin);

@@ -9,7 +9,6 @@ import Header from "./components/header/header";
 import Content from "./components/content/content";
 
 class App extends Component {
-
   render() {
     return (
       <BrowserRouter>
@@ -21,5 +20,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;

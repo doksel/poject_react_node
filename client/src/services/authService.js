@@ -6,3 +6,6 @@ export const loginUserDb = (user) => {
 export const registerUserDb = (user) => {
     return axios.post(`http://localhost:3001/auth/register`,user)
 }
+export const authUserSession = () => {
+    return axios.get(`http://localhost:3001/`)
+}
