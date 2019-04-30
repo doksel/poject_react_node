@@ -8,25 +8,21 @@ class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            navLinks: [
-                {name: 'Home', link: '/'},
-                {name: 'About us', link: '/about'},
-                {name: 'News', link: '/news'},
-                {name: 'Contacts', link: '/contacts'},
-            ],
             auth: 'login'
         };
     }
+    navLinks(){
+        const navLinks = [
+            {name: 'Home', link: '/'},
+            {name: 'About us', link: '/about'},
+            {name: 'News', link: '/news'},
+            {name: 'Contacts', link: '/contacts'},
+        ]
+        return navLinks;
+    }
     componentDidMount() {
-        console.log(this.props.dataAuth);
-        // let stateUser = (this.props.dataAuth.user)?"logout":"login";
-        // this.setState({auth: stateUser});
     }
     componentDidUpdate() {
-        console.log(this.props.dataAuth);
-        // console.log(this.props.dataAuth.user.login);
-        // let stateUser = (this.props.dataAuth.user)?"logout":"login";
-        // this.setState({auth: stateUser}); 
         if(this.props.dataAuth.user){
             if(this.state.auth === 'login'){
                 let stateUser = (this.props.dataAuth.user)?"logout":"login";
@@ -35,7 +31,7 @@ class Navbar extends Component {
         } 
     }
     render () {
-        const navLinks = this.state.navLinks;
+        const navLinks = this.navLinks();
         const stateUser = this.state.auth;
         return(
             <nav className={style.navbar}>

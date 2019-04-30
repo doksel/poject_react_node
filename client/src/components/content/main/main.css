@@ -40,6 +40,7 @@
     padding: 0 10px;
 }
 .wrap_foto_inner{
+    display: block;
     padding: 5px;
     background: #fff;
     box-shadow: 0 5px 10px 1px #ababab;

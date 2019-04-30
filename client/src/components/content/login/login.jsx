@@ -32,11 +32,8 @@ class LoginPage extends Component {
         formLogin.style.display = 'none';
     }
     componentDidMount() {
-        console.log(this.props.dataAuth);
     }
     componentDidUpdate() {
-        console.log(this.props.dataAuth);
-        // console.log(this.props.dataAuth.user.login);
     }
     render() {
         const dataAuth = this.props.dataAuth.user;

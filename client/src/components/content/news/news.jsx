@@ -5,7 +5,7 @@ import Comment from './comment/comment';
 
 import { connect } from 'react-redux';
 import { postsFetchData, getPost, createPost, updatePost, deletePost }  from './../../../actions/postsAction';
-import { commentsFetchData, getComment, createComment, deleteComment}  from './../../../actions/commentsAction';
+import { commentsFetchData, createComment }  from './../../../actions/commentsAction';
 
 
 class News extends Component {

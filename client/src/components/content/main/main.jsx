@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import banner from './../../../images/main_banner.jpg';
 import './main.css';
 
@@ -19,7 +19,6 @@ const Main_banner = () => {
                 < SimpleSlider />
             </div>
         </div>
-
     )
 }
 export default Main_banner;
