@@ -23,7 +23,8 @@ app.use(
         resave: true,
         proxy: true,
         saveUninitialized: false,
-        cookie: { path: '/', httpOnly: false , secure: true, maxAge:24*60*60*1000 },
+        cookie: { path: '/', httpOnly: false , secure: true, maxAge:new Date(Date.now() + 24*60*60*1000) },
+        // cookie: { maxAge: new Date(Date.now() + 24*60*60*1000) },
         store: new MongoStore({
             mongooseConnection: mongoose.connection
         })
